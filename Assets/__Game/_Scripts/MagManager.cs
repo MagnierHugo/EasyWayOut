@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class MagManager {
-    private List<bool> Slots = new List<bool>();
+    [SerializeField] private List<bool> Slots = new List<bool>();
     private int CurrentIndex = 0;
 
     public void InitMag(int MagCount) {
