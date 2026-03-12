@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour, IShootable
+public class Opponent : MonoBehaviour, IShootable
 {
     public void GetShot()
     {
