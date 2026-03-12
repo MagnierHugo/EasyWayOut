@@ -30,4 +30,9 @@ public class MagManager {
     public bool GetBullet() {
         return Slots[CurrentIndex];
     }
+    
+    public void ShootBullet() {
+        Slots[CurrentIndex] = false;
+        CurrentIndex = (CurrentIndex + 1) % Slots.Count;
+    }
 }
