@@ -1,4 +1,4 @@
 public interface IHaveSpecial
 {
-    public void Special();
+    public void Special(Player target);
 }
