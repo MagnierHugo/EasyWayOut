@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagManager : MonoBehaviour {
+public class MagManager {
     private List<bool> Slots = new List<bool>();
     private int CurrentIndex = 0;
 
     public void InitMag(int MagCount) {
         Slots = new List<bool>(MagCount);
-        CurrentIndex = Random.Range(0, Slots.Count - 1);
+        CurrentIndex = Random.Range(0, Slots.Count);
     }
         
 
