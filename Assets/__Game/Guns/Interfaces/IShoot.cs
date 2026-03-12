@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IShoot
 {
-    public bool Shoot(Player target);
+    public void Shoot(Player target);
 }
