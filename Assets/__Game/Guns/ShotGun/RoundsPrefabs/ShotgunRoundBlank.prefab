@@ -8,10 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: maxSize.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: maxSize.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: maxSize.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2551844117867056171, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6617179159286997061, guid: 1076192d7e6f92b48860e125b7896ec0, type: 3}
     - target: {fileID: 3228968923805327582, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 35b4adf22c5aa1e41888080a33204eb0, type: 2}
+      objectReference: {fileID: 6034957751646507721, guid: 1076192d7e6f92b48860e125b7896ec0, type: 3}
     - target: {fileID: 5699957302433482794, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: m_text
       value: 'Blank '

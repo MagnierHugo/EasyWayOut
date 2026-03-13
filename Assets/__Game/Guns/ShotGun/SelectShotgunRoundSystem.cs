@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public sealed class SelectShotgunRoundSystem : MonoBehaviour
 {
@@ -35,11 +37,14 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
 
     private bool demonstrationSequenceOver;
+    [SerializeField] private float velocityUponDiscardCoefficient;
+
     private async void Awake()
     {
         blankRoundInstance = Instantiate(blankRoundPrefab, transform.position, Quaternion.identity);
         blankRoundInstance.gameObject.SetActive(false);
         blankRoundAnchorPoint = transform.GetChild(0).position;
+
         liveRoundInstance = Instantiate(liveRoundPrefab, transform.position, Quaternion.identity);
         liveRoundInstance.gameObject.SetActive(false);
         liveRoundAnchorPoint = transform.GetChild(1).position;
@@ -77,27 +82,33 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         blankRoundInstance.gameObject.SetActive(true);
         liveRoundInstance.gameObject.SetActive(true);
     }
+    private bool forceStopMovement;
     private IEnumerator MoveRoundsIntoView(Action callback)
     {
         float elapsed = 0;
-        while (elapsed < lerpToPositionDuration)
-        {
-            float a = elapsed / lerpToPositionDuration;
-            liveRoundInstance.transform.position = Vector3.Slerp(
-                liveRoundInstance.transform.position,
-                liveRoundAnchorPoint,
-                a
-            );
-            blankRoundInstance.transform.position = Vector3.Slerp(
-                blankRoundInstance.transform.position,
-                blankRoundAnchorPoint,
-                a
-            );
+        yield return new WaitWhile(
+            () =>
+            {
+                bool condition = !forceStopMovement && elapsed < lerpToPositionDuration ;
+                elapsed += Time.time;
 
+                float a = elapsed / lerpToPositionDuration;
+                liveRoundInstance.transform.position = Vector3.Slerp(
+                    liveRoundInstance.transform.position,
+                    liveRoundAnchorPoint,
+                    a
+                );
+                blankRoundInstance.transform.position = Vector3.Slerp(
+                    blankRoundInstance.transform.position,
+                    blankRoundAnchorPoint,
+                    a
+                );
 
-            yield return elapsed += Time.deltaTime;
-        }
+                return condition;
+            }
+        );
 
+        forceStopMovement = false;
         callback?.Invoke();
     }
 
@@ -115,17 +126,30 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
                     roundsSelection[--roundLeftToSelect] = true
                 )
         );
+
         demonstrationSequenceOver = true;
 
     }
     private IEnumerator StartRoundSelectedSequence(bool selectedLiveOne)
     {
-        Debug.Log($"{nameof(StartRoundSelectedSequence)}({selectedLiveOne})");
+        //yield return new WaitForFixedUpdate();
+        forceStopMovement = true;
+        Rigidbody relevantRigidBody = selectedLiveOne ? 
+            blankRoundInstance.AddComponent<Rigidbody>():
+            liveRoundInstance.AddComponent<Rigidbody>()
+        ;
 
-        blankRoundInstance.gameObject.SetActive(false);
-        blankRoundInstance.transform.localPosition = Vector3.zero;
-        liveRoundInstance.gameObject.SetActive(false);
-        liveRoundInstance.transform.localPosition = Vector3.zero;
+        Vector3 discardVelocity;
+        do discardVelocity = UnityEngine.Random.insideUnitSphere;
+        while (discardVelocity.y < .0f);
+
+        //relevantRigidBody.angularVelocity = relevantRigidBody.linearVelocity = Vector3.zero;
+        relevantRigidBody.AddRelativeTorque(UnityEngine.Random.insideUnitSphere, ForceMode.VelocityChange);
+        relevantRigidBody.AddForce(discardVelocity * velocityUponDiscardCoefficient, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(2f);
+
+        ClearRounds(relevantRigidBody);
 
         yield return awaitDurationBetweenSelections;
 
@@ -133,6 +157,29 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
             StartRoundSelectionSequence();
         else
             Shotgun.Instance.LoadShells();
+    }
+
+    private IEnumerator TrackRigidbodyData(Rigidbody rigidbody)
+    {
+        yield return new WaitUntil(
+            () =>
+            {
+                bool val = rigidbody == null;
+                if (val)
+                    Debug.Log(rigidbody.linearVelocity);
+                return val;
+            }
+        );
+    }
+
+    private void ClearRounds(Rigidbody relevantRigidbody)
+    {
+        Destroy(relevantRigidbody);
+        blankRoundInstance.gameObject.SetActive(false);
+        blankRoundInstance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+        liveRoundInstance.gameObject.SetActive(false);
+        liveRoundInstance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
     }
 
     private void Update()

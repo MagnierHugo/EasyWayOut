@@ -13,32 +13,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: maxSize.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: maxSize.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
+      propertyPath: maxSize.z
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6705163732281994812, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: <IsLive>k__BackingField
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3228968923805327582, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: f9bdbf02d63e43742a48dd66fc0c4b4f, type: 2}
+      objectReference: {fileID: 8748892135801146194, guid: 4377f9911b46a5d4c9a29c765f828e69, type: 3}
     - target: {fileID: 5699957302433482794, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: m_text
-      value: Live round
+      value: Live
       objectReference: {fileID: 0}
     - target: {fileID: 7327503790291113933, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: m_Name
       value: ShotgunRoundLive
-      objectReference: {fileID: 0}
-    - target: {fileID: 7531819653288821572, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7531819653288821572, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7531819653288821572, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7531819653288821572, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: m_LocalPosition.x
@@ -79,10 +79,6 @@ PrefabInstance:
     - target: {fileID: 7531819653288821572, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7531819653288821572, guid: 7ebbcb0e251ca9d4495d5b968112d079, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
