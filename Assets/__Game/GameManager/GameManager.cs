@@ -5,12 +5,22 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] LightingManager lightingManager = null;
 
-    public int currentRound = 0;
-    public Player player;
-    public Player opponent;
+    [Header("State")]
+    [SerializeField] private int currentRound = 0;
+    [SerializeField] private Player player;
+    [SerializeField] private Player opponent;
+
+    [Header("Guns Prefab")]
+    [SerializeField] private GameObject revolverPrefab = null;
+    [SerializeField] private GameObject nailgunPrefab = null;
+    [SerializeField] private GameObject shotgunPrefab = null;
+    [SerializeField] private GameObject doubleBarrelPrefab = null;
+    [SerializeField] private GameObject burstPrefab = null;
 
     private bool playerHasGun = true;
     private List<int> weaponList = new List<int> { 0, 1, 2, 3 };
+
+    public Gun currentWeapon;
 
     private void Start()
     {
@@ -82,26 +92,43 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("No more weapons in the list!");
             return;
         }
+        
+        if (currentWeapon != null)
+        {
+            Destroy(currentWeapon.gameObject);
+        }
 
         int randomIndex = Random.Range(0, weaponList.Count);
 
         int chosenWeaponID = weaponList[randomIndex];
         weaponList.RemoveAt(randomIndex);
 
+        GameObject weaponToSpawn = null;
+
         switch (chosenWeaponID)
         {
             case 0:
-                // Choose Double-Barrel
+                weaponToSpawn = doubleBarrelPrefab;
                 break;
             case 1:
-                // Choose Shotgun
+                weaponToSpawn = shotgunPrefab;
                 break;
             case 2:
-                // Choose Nailgun
+                weaponToSpawn = nailgunPrefab;
                 break;
             case 3:
-                // Choose Burst
+                weaponToSpawn = burstPrefab;
                 break;
+        }
+
+        if (weaponToSpawn != null)
+        {
+            GameObject spawnedObject = Instantiate(weaponToSpawn, Vector3.zero, Quaternion.identity);
+
+            currentWeapon = spawnedObject.GetComponent<Gun>();
+
+            player.EquipWeapon(currentWeapon);
+            opponent.EquipWeapon(currentWeapon);
         }
     }
 }

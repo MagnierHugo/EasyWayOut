@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Nailgun : MonoBehaviour, IShoot, IHaveSpecial
+public class Nailgun : Gun, IHaveSpecial
 {
     private MagManager magManager;
 
@@ -20,7 +20,7 @@ public class Nailgun : MonoBehaviour, IShoot, IHaveSpecial
     }
 
 
-    public void Shoot(Player target)
+    public new void Shoot(IShootable target)
     {
         if (magManager.GetBullet())
         {
@@ -30,7 +30,7 @@ public class Nailgun : MonoBehaviour, IShoot, IHaveSpecial
         if(!canShootHand && !isHandNailed) { canShootHand = true;}
     }
 
-    public void Special(Player target)
+    public void Special(IShootable target)
     {
         if (canShootHand)
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
+public class Revolver : Gun, IHaveSpecial
 {
     private MagManager magManager;
 
@@ -9,7 +9,7 @@ public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
         magManager.InitMag(6);
     }
 
-    public void Shoot(Player target)
+    public new void Shoot(IShootable target)
     {
         if(magManager.GetBullet())
         {
@@ -17,7 +17,7 @@ public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
         }
     }
 
-    public void Special(Player target)
+    public void Special(IShootable target)
     {
         magManager.AddBullet();
         magManager.Shuffle();

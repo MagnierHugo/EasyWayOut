@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class DoubleBarrel : MonoBehaviour, IShoot, IHaveSpecial
+public class DoubleBarrel : Gun, IHaveSpecial
 {
     [SerializeField] private MagManager[] mags = new MagManager[2];
     private int currentMag = 0;
     private IShootable lastSwitch;
 
-    public void Shoot(IShootable target)
+    public new void Shoot(IShootable target)
     {
         bool bullet = mags[currentMag].GetBullet();
         if (!bullet) return;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShotGun : MonoBehaviour, IShoot {
+public class ShotGun : Gun {
     private MagManager magManager;
     private int RemainingBulletsToAdd = 2;
 
@@ -16,7 +16,7 @@ public class ShotGun : MonoBehaviour, IShoot {
         }
     }
 
-    public void Shoot(IShootable target) {
+    public new void Shoot(IShootable target) {
         if (target == null) return;
         if (magManager.GetBullet()) {
             target.GetShot();
