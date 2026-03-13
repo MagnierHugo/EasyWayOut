@@ -1,4 +1,4 @@
 public interface IHaveSpecial
 {
-    public void Special(IShootable target);
+    public void Special();
 }
