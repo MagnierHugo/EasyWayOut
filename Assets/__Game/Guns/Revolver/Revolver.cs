@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Revolver : MonoBehaviour, IHaveSpecial, IShoot
+public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
 {
     private MagManager magManager;
 
