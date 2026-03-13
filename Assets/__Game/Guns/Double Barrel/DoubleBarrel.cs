@@ -1,16 +1,26 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DoubleBarrel : Gun, IHaveSpecial
 {
-    [SerializeField] private MagManager[] mags = new MagManager[2];
+    [SerializeField] private Mag[] mags = new Mag[2];
     private int currentMag = 0;
     private IShootable lastSwitch;
+
+    [SerializeField] private ParticleSystem muzzleFlash;
 
     public override void Shoot(IShootable target)
     {
         bool bullet = mags[currentMag].GetBullet();
-        if (bullet) target.GetShot();
-        else target.EmptyShot();
+        if (!bullet)
+        {
+            target.EmptyShot();
+            return;
+        }
+
+        muzzleFlash.Play();
+        target.GetShot();
     }
 
     public void Special(IShootable target)

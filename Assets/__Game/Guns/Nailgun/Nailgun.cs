@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Nailgun : Gun, IHaveSpecial
 {
-    private MagManager magManager = new MagManager();
+    private Mag mag = new Mag();
 
     public bool canTargetOpponent = false;
 
@@ -12,17 +12,16 @@ public class Nailgun : Gun, IHaveSpecial
     private void Start()
     {
         // Init mag with 11 chambers and 3 bullets
-        magManager.InitMag(11);
-        magManager.AddBullet();
-        magManager.Shuffle();
-        magManager.AddBullet();
-        magManager.Shuffle();
+        mag.InitMag(11);
+        mag.AddBullet();
+        mag.Shuffle();
+        mag.AddBullet();
+        mag.Shuffle();
     }
-
 
     public override void Shoot(IShootable target)
     {
-        if (magManager.GetBullet()) target.GetShot();
+        if (mag.GetBullet()) target.GetShot();
         else target.EmptyShot();
 
 
@@ -33,7 +32,7 @@ public class Nailgun : Gun, IHaveSpecial
     {
         if (canShootHand)
         {
-            if (magManager.GetBullet())
+            if (mag.GetBullet())
             {
                 // Call shoot Hand animation (Nail version)
                 isHandNailed = true;

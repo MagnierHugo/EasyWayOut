@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class Revolver : Gun, IHaveSpecial
 {
-    private MagManager magManager = new MagManager();
+    private Mag mag = new Mag();
 
     private void Awake()
     {
-        magManager.InitMag(6);
+        mag.InitMag(6);
     }
 
     public override void Shoot(IShootable target)
     {
-        bool hasBullet = magManager.GetBullet();
+        bool hasBullet = mag.GetBullet();
 
         // 3. Resolve the shot
         if (hasBullet)
@@ -28,8 +28,8 @@ public class Revolver : Gun, IHaveSpecial
 
     public void Special(IShootable target)
     {
-        magManager.AddBullet();
-        magManager.Shuffle();
+        mag.AddBullet();
+        mag.Shuffle();
         Shoot(target);
     }
 }
