@@ -164,6 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDuration: 1
+  playerPos: {x: 0.5, y: 2.05, z: 2.75}
+  playerRot: {x: 0.49999997, y: 0.49999997, z: -0.49999997, w: -0.49999997}
+  opponentPos: {x: 0.9, y: 2.05, z: 0.555}
+  opponentRot: {x: 0.49999997, y: 0.49999997, z: 0.49999997, w: 0.49999997}
 --- !u!1001 &2914995998085210750
 PrefabInstance:
   m_ObjectHideFlags: 0
