@@ -72,17 +72,19 @@ public class GameManager : MonoBehaviour
     {
         playerHasGun = !playerHasGun;
 
+        WeaponMover mover = currentWeapon.GetComponent<WeaponMover>();
+
         if (playerHasGun)
         {
-            // Play Sending weapon to player animation
+            mover.SlideToPlayer();
         }
         else
         {
-            // Play Sending weapon to op animation
+            mover.SlideToOpponent();
         }
 
         // Start the next turn
-        PlayTurn();
+        Invoke("PlayTurn", mover.moveDuration);
     }
 
     public void OpponentDied()
