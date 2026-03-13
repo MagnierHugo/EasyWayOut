@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[1].Text
@@ -1094,6 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829d8014733fe0947b5bec6c9b050f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   armPivot: {fileID: 655922558}
   handPivot: {fileID: 1697218500}
 --- !u!1 &1604595294

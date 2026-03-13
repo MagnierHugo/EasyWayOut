@@ -5,15 +5,13 @@ using UnityEngine.UI;
 using TMPro; 
 
 [System.Serializable]
-public struct TextItem 
-{
+public struct TextItem {
     [TextArea]
     public string Text; 
     public float Duration;
 }
 
-public class CinematicText : MonoBehaviour 
-{
+public class CinematicText : MonoBehaviour {
     [SerializeField] private List<TextItem> inspectorTexts = new List<TextItem>();
     [SerializeField] private TextMeshProUGUI displayText;
     [SerializeField] private Image displayBlur;
@@ -29,21 +27,17 @@ public class CinematicText : MonoBehaviour
     private RectTransform textRectTransform;
     private Vector2 originalPosition;
     private Material blurMaterialInstance;
-    
-    // Store the original alpha of the blur image so we know what to fade it up to
+
     private float originalBlurAlpha = 1f; 
 
-    void Start() 
-    {
+    void Start() {
         textRectTransform = displayText.GetComponent<RectTransform>();
         originalPosition = textRectTransform.anchoredPosition;
 
-        if (displayBlur != null)
-        {
+        if (displayBlur != null) {
             originalBlurAlpha = displayBlur.color.a;
 
-            if (displayBlur.material != null)
-            {
+            if (displayBlur.material != null) {
                 blurMaterialInstance = new Material(displayBlur.material);
                 displayBlur.material = blurMaterialInstance;
                 blurMaterialInstance.SetFloat("_BlurForce", 0f);
@@ -52,39 +46,31 @@ public class CinematicText : MonoBehaviour
 
         UpdateDisplaySequence(inspectorTexts);
 
-        if (textsToDisplay.Count > 0) 
-        {
+        if (textsToDisplay.Count > 0) {
             StartDisplaySequence();
         }
+        displayText.text = "";
     }
 
-    public void UpdateDisplaySequence(List<TextItem> Sequences) 
-    {
-        foreach (TextItem item in Sequences) 
-        {
+    public void UpdateDisplaySequence(List<TextItem> Sequences) {
+        foreach (TextItem item in Sequences) {
             textsToDisplay.Enqueue(item);
         }
     }
 
-    public void StartDisplaySequence() 
-    {
+    public void StartDisplaySequence() {
         StartCoroutine(DisplaySequence());
     }
 
-    private IEnumerator DisplaySequence() 
-    {
-        while (textsToDisplay.Count > 0) 
-        {
+    private IEnumerator DisplaySequence() {
+        while (textsToDisplay.Count > 0) {
             TextItem currentItem = textsToDisplay.Dequeue();
 
-            // 1. Reset text position, set the new text, and force Alpha to 0
             textRectTransform.anchoredPosition = originalPosition;
             displayText.text = currentItem.Text;
-            displayText.alpha = 0f; // <-- Using TMP's dedicated alpha property
+            displayText.alpha = 0f;
             
-            // Set initial Blur image transparency to 0
-            if (displayBlur != null)
-            {
+            if (displayBlur != null) {
                 Color blurColor = displayBlur.color;
                 blurColor.a = 0f;
                 displayBlur.color = blurColor;
@@ -92,24 +78,18 @@ public class CinematicText : MonoBehaviour
 
             // --- FADE IN ---
             float timer = 0f;
-            while (timer < fadeInDuration) 
-            {
+            while (timer < fadeInDuration)  {
                 timer += Time.deltaTime;
                 float progress = timer / fadeInDuration;
 
-                // Text fades in directly via .alpha
                 displayText.alpha = Mathf.Lerp(0f, 1f, progress);
 
-                if (displayBlur != null)
-                {
-                    // Fade Blur transparency
+                if (displayBlur != null) {
                     Color blurColor = displayBlur.color;
                     blurColor.a = Mathf.Lerp(0f, originalBlurAlpha, progress);
                     displayBlur.color = blurColor;
 
-                    // Increase Blur Force
-                    if (blurMaterialInstance != null)
-                    {
+                    if (blurMaterialInstance != null) {
                         blurMaterialInstance.SetFloat("_BlurForce", Mathf.Lerp(0f, maxBlurForce, progress));
                     }
                 }
@@ -124,25 +104,21 @@ public class CinematicText : MonoBehaviour
             timer = 0f;
             Vector2 targetPosition = originalPosition - new Vector2(0, fallDistance);
 
-            while (timer < fadeOutDuration) 
-            {
+            while (timer < fadeOutDuration) {
                 timer += Time.deltaTime;
                 float progress = timer / fadeOutDuration;
 
-                // Text fades out directly via .alpha and falls
                 displayText.alpha = Mathf.Lerp(1f, 0f, progress);
                 textRectTransform.anchoredPosition = Vector2.Lerp(originalPosition, targetPosition, progress);
 
-                if (displayBlur != null)
-                {
+                if (displayBlur != null) {
                     // Fade Blur transparency
                     Color blurColor = displayBlur.color;
                     blurColor.a = Mathf.Lerp(originalBlurAlpha, 0f, progress);
                     displayBlur.color = blurColor;
 
                     // Decrease Blur Force
-                    if (blurMaterialInstance != null)
-                    {
+                    if (blurMaterialInstance != null) {
                         blurMaterialInstance.SetFloat("_BlurForce", Mathf.Lerp(maxBlurForce, 0f, progress));
                     }
                 }
@@ -151,8 +127,7 @@ public class CinematicText : MonoBehaviour
             }
 
             displayText.alpha = 0f;
-            if (displayBlur != null)
-            {
+            if (displayBlur != null) {
                 Color finalBlurColor = displayBlur.color;
                 finalBlurColor.a = 0f;
                 displayBlur.color = finalBlurColor;
@@ -160,7 +135,6 @@ public class CinematicText : MonoBehaviour
 
             yield return new WaitForSeconds(delayBetweenTexts);
         }
-        
         displayText.text = "";
     }
 }
