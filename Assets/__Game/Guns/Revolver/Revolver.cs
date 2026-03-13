@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
 {
-    private MagManager magManager;
+    private readonly MagManager magManager = new MagManager();
 
-    private void Start()
-    {
-        magManager.InitMag(6);
-    }
+    private void Start() => magManager.Init(6);
 
     public void Shoot(IShootable target)
     {
-        if(magManager.GetBullet())
+        if(magManager.NextBulletIsLive())
         {
             target.GetShot();
         }

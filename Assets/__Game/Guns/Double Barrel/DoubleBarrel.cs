@@ -34,7 +34,7 @@ public class DoubleBarrel : MonoBehaviour, IShoot, IHaveSpecial
 
     public void Shoot(IShootable target)
     {
-        bool bullet = mags[currentMag].GetBullet();
+        bool bullet = mags[currentMag].NextBulletIsLive();
         if (!bullet) return;
 
         muzzleFlash.Play();

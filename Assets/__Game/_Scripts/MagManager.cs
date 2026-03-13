@@ -2,38 +2,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MagManager {
-    [SerializeField] private List<bool> Slots = new List<bool>();
-    private int CurrentIndex = 0;
+public sealed class MagManager {
+    [SerializeField] private List<bool> slots = new List<bool>();
+    private int currentIndex = 0;
 
-    public void InitMag(int MagCount) {
-        Slots = new List<bool>(MagCount);
-        CurrentIndex = Random.Range(0, Slots.Count);
+    public void Init(int magCount) {
+        slots = new List<bool>(magCount);
+        currentIndex = Random.Range(0, slots.Count);
     }
-        
 
+    
+
+    /// <summary>
+    /// preserves mag order but change the relevant chamber
+    /// </summary>
     public void Shuffle() {
-        int ShuffleForce = Random.Range(5, 11);
-        CurrentIndex = (CurrentIndex + ShuffleForce) % Slots.Count;
+        int shuffleForce = Random.Range(5, 11);
+        currentIndex = (currentIndex + shuffleForce) % slots.Count;
     }
 
 
     public void AddBullet() {
-        for (int idx = 0; idx < Slots.Count; idx++) {
-            if (Slots[idx] == false) {
-                Slots[idx] = true;
+        for (int idx = 0; idx < slots.Count; idx++) {
+            if (!slots[idx]) {
+                slots[idx] = true;
                 return;
             }
         }
+        Debug.LogError("Failed to add a bullet");
         return;
     }
 
-    public bool GetBullet() {
-        return Slots[CurrentIndex];
-    }
-    
+    public bool NextBulletIsLive() => slots[currentIndex];
+
     public void ShootBullet() {
-        Slots[CurrentIndex] = false;
-        CurrentIndex = (CurrentIndex + 1) % Slots.Count;
+        slots[currentIndex] = false;
+        currentIndex = (currentIndex + 1) % slots.Count;
     }
 }
