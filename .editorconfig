@@ -1,0 +1,7 @@
+[*.cs]
+dotnet_diagnostic.IDE0090.severity = none # disables "new expression can be simplified" globally cah I can t be bothered with it (for classes)
+dotnet_diagnostic.IDE0017.severity = none # disables "new expression can be simplified" globally cah I can t be bothered with it (for structs)
+dotnet_diagnostic.IDE0350.severity = none # disables "lambda expression can be simplified"
+dotnet_diagnostic.IDE0063.severity = none # disables "'using' statement can be simplified"
+# dotnet_diagnostic.IDE0039.severity = none # disables "Use local function"
+end_of_line = crlf # force lines ending to be crlf

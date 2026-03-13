@@ -9,13 +9,15 @@ using UnityEngine.UIElements;
 
 public sealed class SelectShotgunRoundSystem : MonoBehaviour
 {
-    private Ray ViewRay => camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+    private Ray ViewRay => camera.ScreenPointToRay(
+        Mouse.current.position.ReadValue()
+    );
     [SerializeField] private new Camera camera;
     private static LayerMask roundsLayer;
     private ShotgunRound hovered;
 
-    private int roundLeftToSelect = 4;
-    private readonly bool[] roundsSelection = new bool[4];
+    private int roundLeftToSelect = 3;
+    private int liveRoundCount = 1;
     private bool readyToSelect;
 
     [SerializeField] private ShotgunRound liveRoundPrefab;
@@ -39,27 +41,31 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     private bool demonstrationSequenceOver;
     [SerializeField] private float velocityUponDiscardCoefficient;
 
-    private async void Awake()
-    {
-        blankRoundInstance = Instantiate(blankRoundPrefab, transform.position, Quaternion.identity);
-        blankRoundInstance.gameObject.SetActive(false);
-        blankRoundAnchorPoint = transform.GetChild(0).position;
+    [SerializeField] private Shotgun shotgun;
 
-        liveRoundInstance = Instantiate(liveRoundPrefab, transform.position, Quaternion.identity);
+    private void Awake()
+    {
+        Transform temp = transform.GetChild(0);
+        blankRoundInstance = Instantiate(blankRoundPrefab, temp);
+        blankRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        blankRoundInstance.gameObject.SetActive(false);
+        blankRoundAnchorPoint = temp.position;
+
+        temp = transform.GetChild(1);
+        liveRoundInstance = Instantiate(liveRoundPrefab, temp);
+        liveRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
         liveRoundInstance.gameObject.SetActive(false);
-        liveRoundAnchorPoint = transform.GetChild(1).position;
+        liveRoundAnchorPoint = temp.position;
 
         roundsLayer = LayerMask.GetMask("ShotgunRounds");
-
-        await Task.Delay(1000);
 
         awaitDurationBetweenSelections = new WaitForSeconds(durationBetweenSelections);
         awaitAnimationSelectsRound = new WaitForSeconds(timeBeforeAnimationSelectsRound);
         awaitDurationAnimationHoversRound = new WaitForSeconds(durationAnimationHoversRound);
 
         StartRoundSelectionSequence();
-
     }
+
     private void StartRoundSelectionSequence()
     {
         readyToSelect = true;
@@ -71,7 +77,7 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         StartCoroutine(
             MoveRoundsIntoView(
                 demonstrationSequenceOver ? 
-                    () => readyToSelect = true :
+                    () => { } :
                     () => { StartCoroutine(PlayRoundSelectionDemonstration()); }
             )
         );
@@ -86,10 +92,10 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     private IEnumerator MoveRoundsIntoView(Action callback)
     {
         float elapsed = 0;
-        yield return new WaitWhile(
+        yield return new WaitUntil(
             () =>
             {
-                bool condition = !forceStopMovement && elapsed < lerpToPositionDuration ;
+                bool condition = forceStopMovement || elapsed > lerpToPositionDuration;
                 elapsed += Time.time;
 
                 float a = elapsed / lerpToPositionDuration;
@@ -121,18 +127,12 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         yield return awaitDurationAnimationHoversRound;
 
         liveRoundInstance.OnHoverExit();
-        StartCoroutine(
-                StartRoundSelectedSequence(
-                    roundsSelection[--roundLeftToSelect] = true
-                )
-        );
+        StartCoroutine(StartRoundSelectedSequence(true));
 
         demonstrationSequenceOver = true;
-
     }
     private IEnumerator StartRoundSelectedSequence(bool selectedLiveOne)
     {
-        //yield return new WaitForFixedUpdate();
         forceStopMovement = true;
         Rigidbody relevantRigidBody = selectedLiveOne ? 
             blankRoundInstance.AddComponent<Rigidbody>():
@@ -143,7 +143,6 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         do discardVelocity = UnityEngine.Random.insideUnitSphere;
         while (discardVelocity.y < .0f);
 
-        //relevantRigidBody.angularVelocity = relevantRigidBody.linearVelocity = Vector3.zero;
         relevantRigidBody.AddRelativeTorque(UnityEngine.Random.insideUnitSphere, ForceMode.VelocityChange);
         relevantRigidBody.AddForce(discardVelocity * velocityUponDiscardCoefficient, ForceMode.VelocityChange);
 
@@ -156,30 +155,17 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         if (roundLeftToSelect > 0)
             StartRoundSelectionSequence();
         else
-            Shotgun.Instance.LoadShells();
-    }
-
-    private IEnumerator TrackRigidbodyData(Rigidbody rigidbody)
-    {
-        yield return new WaitUntil(
-            () =>
-            {
-                bool val = rigidbody == null;
-                if (val)
-                    Debug.Log(rigidbody.linearVelocity);
-                return val;
-            }
-        );
+            shotgun.LoadShells(liveRoundCount);
     }
 
     private void ClearRounds(Rigidbody relevantRigidbody)
     {
         Destroy(relevantRigidbody);
-        blankRoundInstance.gameObject.SetActive(false);
-        blankRoundInstance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
+        blankRoundInstance.gameObject.SetActive(false);
         liveRoundInstance.gameObject.SetActive(false);
-        liveRoundInstance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        blankRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        liveRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
     }
 
     private void Update()
@@ -216,11 +202,11 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     Process:
         if (hovered != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
+            liveRoundCount += hovered.IsLive ? 1 : 0;
+            --roundLeftToSelect;
             StartCoroutine(
-                StartRoundSelectedSequence(
-                    roundsSelection[--roundLeftToSelect] = hovered.IsLive
-                    )
-                );
+                StartRoundSelectedSequence(hovered.IsLive)
+            );
         }
     }
 
@@ -229,5 +215,11 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     {
         hovered.OnHoverExit();
         hovered = null;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, .1f);
     }
 }

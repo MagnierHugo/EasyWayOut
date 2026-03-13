@@ -26,7 +26,7 @@ public class Nailgun : Gun, IHaveSpecial
 
     public override void Shoot(IShootable target)
     {
-        if (mag.NextBulletIsLive())
+        if (mag.GetBullet())
         {
             Debug.Log("BANG!");
             target.GetShot();
@@ -46,7 +46,7 @@ public class Nailgun : Gun, IHaveSpecial
     {
         if (canShootHand)
         {
-            if (mag.NextBulletIsLive())
+            if (mag.GetBullet())
             {
                 // Call shoot Hand animation (Nail version)
                 isHandNailed = true;

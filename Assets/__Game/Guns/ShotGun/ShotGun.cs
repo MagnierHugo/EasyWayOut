@@ -1,22 +1,31 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public sealed class Shotgun : MonoBehaviour, IShoot
 {
-    public static Shotgun Instance { get; private set; }
+    private readonly Mag mag = new Mag();
 
-    private readonly MagManager magManager = new MagManager();
-    private void Awake() => Instance = this;
+    private ParticleSystem muzzleFlash;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip pumpingAudio;
+    [SerializeField] private AudioClip gunShotAudio;
+    [SerializeField] private AudioClip gunClickAudio;
 
-    public void LoadShells()
+    private void Awake()
     {
-        magManager.Init(8);
+        audioSource = GetComponent<AudioSource>();
+        muzzleFlash = transform.GetChild(1).GetComponent<ParticleSystem>();
+    }
 
-        //if (remainingBulletsToAdd > 0)
-        //{
-        //    magManager.AddBullet();
-        //    magManager.Shuffle();
-        //    remainingBulletsToAdd--;
-        //}
+    public void LoadShells(int liveRoundCount)
+    {
+        mag.Init(8);
+        for (int i = 0; i < liveRoundCount; i++)
+            mag.AddBullet();
+
+        mag.ShuffleRandom();
     }
 
     public void Shoot(IShootable target)
@@ -24,9 +33,12 @@ public sealed class Shotgun : MonoBehaviour, IShoot
         if (target == null)
             return;
 
-        if (magManager.NextBulletIsLive())
-            target.GetShot();
-        else
-            magManager.ShootBullet();
+        StartCoroutine(StartShootingSequence());
     }
+
+    private IEnumerator StartShootingSequence()
+    {
+        yield return null;
+    }
+
 }

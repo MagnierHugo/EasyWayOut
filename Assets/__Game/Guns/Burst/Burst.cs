@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class Burst : Gun, IHaveSpecial
@@ -12,7 +12,7 @@ public class Burst : Gun, IHaveSpecial
     public override void Shoot(IShootable target)
     {
 
-        if (mag.NextBulletIsLive())
+        if (mag.GetBullet())
             target.GetShot();
         else
             target.EmptyShot();

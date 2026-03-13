@@ -15,12 +15,12 @@ public class DoubleBarrel : Gun, IHaveSpecial
         Debug.Log("Double");
 
         foreach (Mag mag in mags)
-            mag.InitMag(6);
+            mag.Init(6);
     }
 
     public override void Shoot(IShootable target)
     {
-        if (mags[currentMag].NextBulletIsLive())
+        if (mags[currentMag].GetBullet())
         {
             Debug.Log("BANG!");
             target.GetShot();

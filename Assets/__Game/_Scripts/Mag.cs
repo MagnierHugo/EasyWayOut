@@ -7,13 +7,11 @@ public class Mag {
     [SerializeField] private List<bool> slots = new List<bool>();
     private int currentIndex = 0;
 
-    public void InitMag(int MagCount) {
+    public void Init(int MagCount) {
         slots = new List<bool>();
 
         for (int i = 0; i < MagCount; i++)
-        {
             slots.Add(false);
-        }
 
         slots[0] = true;
 
