@@ -36,9 +36,23 @@ public class Cock_Behaviour : StateMachineBehaviour
 
     public event System.Action onCockAnimationEnd;
 
+    //public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    base.OnStateUpdate(animator, stateInfo, layerIndex);
+
+    //    Debug.Log(animator);
+    //}
+
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
+        Debug.Log(nameof(OnStateExit));
         onCockAnimationEnd?.Invoke();
+    }
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
+        Debug.Log(nameof(OnStateEnter));
     }
 }

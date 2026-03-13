@@ -23,7 +23,10 @@ public class Revolver : Gun, IHaveSpecial
 
     public override void Shoot(IShootable target)
     {
-        animator.SetTrigger("Cock Gun");
+        print(animator);
+        print(nameof(Shoot));
+        animator.SetBool("CockGun", true);
+        //animator.Play("Cock hammer");
         audioSource.clip = revolverCockingAudio;
         audioSource.Play();
         var cockBehaviour = animator.GetBehaviour<Cock_Behaviour>();
@@ -31,6 +34,7 @@ public class Revolver : Gun, IHaveSpecial
         // Would have used lambda but it can't ref itself
         void OnCockingAnimationEnd()
         {
+            animator.SetBool("CockGun", false);
             cockBehaviour.onCockAnimationEnd -= OnCockingAnimationEnd;
             bool bullet = mag.GetBullet();
             if (!bullet)
@@ -57,5 +61,11 @@ public class Revolver : Gun, IHaveSpecial
         mag.AddBullet();
         mag.Shuffle();
         Shoot(target);
+    }
+
+    [ContextMenu("HELP")]
+    public void Help()
+    {
+        var animationState = animator.GetAnimatorTransitionInfo(0);
     }
 }
