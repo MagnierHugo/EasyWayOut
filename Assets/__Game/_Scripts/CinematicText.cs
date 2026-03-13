@@ -53,6 +53,25 @@ public class CinematicText : MonoBehaviour {
         }
     }
 
+    private bool paused;
+    private void SetPaused(bool state) {
+        paused = state;
+        displayText.gameObject.SetActive(!paused);
+        displayBlur.gameObject.SetActive(!paused);
+    }
+
+    private void OnPaused() => SetPaused(true);
+    private void OnResume() => SetPaused(false);
+    private void OnEnable() {
+        Game.OnSwitchToMenu += OnPaused;
+        Game.OnSwitchToGameplay += OnResume;
+    }
+
+    private void OnDisable() {
+        Game.OnSwitchToMenu -= OnPaused;
+        Game.OnSwitchToGameplay -= OnResume;
+    }
+
     public void UpdateDisplaySequence(List<TextItem> Sequences) {
         foreach (TextItem item in Sequences) {
             textsToDisplay.Enqueue(item);
@@ -66,6 +85,9 @@ public class CinematicText : MonoBehaviour {
     private IEnumerator DisplaySequence() {
         while (textsToDisplay.Count > 0) {
             TextItem currentItem = textsToDisplay.Dequeue();
+            while (paused) {
+                yield return null;
+            }
 
             textRectTransform.anchoredPosition = originalPosition;
             displayText.text = currentItem.Text;

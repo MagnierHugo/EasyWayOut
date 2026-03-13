@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[DefaultExecutionOrder(-1)]
 public sealed class Game : MonoBehaviour
 {
     static Game()
@@ -24,8 +25,6 @@ public sealed class Game : MonoBehaviour
         OnSwitchToMenu += StopTime;
 
         Manager = this;
-
-        SwitchToGameplay();
     }
 
     private void OnDestroy()
