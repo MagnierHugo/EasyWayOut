@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Burst : Gun, IHaveSpecial
 {
-    private Mag mag = new Mag();
-
     public bool canTargetOpponent = false;
 
     private void Start()

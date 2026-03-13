@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class ShotGun : Gun {
-    private Mag mag = new Mag();
+public class ShotGun : Gun
+{
     private int RemainingBulletsToAdd = 2;
 
     void Start() {
