@@ -6,12 +6,11 @@ public class DoubleBarrel : Gun, IHaveSpecial
     private int currentMag = 0;
     private IShootable lastSwitch;
 
-    public new void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
         bool bullet = mags[currentMag].GetBullet();
-        if (!bullet) return;
-
-        target.GetShot();
+        if (bullet) target.GetShot();
+        else target.EmptyShot();
     }
 
     public void Special(IShootable target)

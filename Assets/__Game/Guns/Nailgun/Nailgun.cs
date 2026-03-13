@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Nailgun : Gun, IHaveSpecial
 {
-    private MagManager magManager;
+    private MagManager magManager = new MagManager();
 
     public bool canTargetOpponent = false;
 
@@ -20,14 +20,13 @@ public class Nailgun : Gun, IHaveSpecial
     }
 
 
-    public new void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
-        if (magManager.GetBullet())
-        {
-            target.GetShot();
-        }
+        if (magManager.GetBullet()) target.GetShot();
+        else target.EmptyShot();
 
-        if(!canShootHand && !isHandNailed) { canShootHand = true;}
+
+        if (!canShootHand && !isHandNailed) { canShootHand = true; }
     }
 
     public void Special(IShootable target)

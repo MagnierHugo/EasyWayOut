@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Burst : Gun, IHaveSpecial
 {
-    private MagManager magManager;
+    private MagManager magManager = new MagManager();
 
     public bool canTargetOpponent = false;
 
@@ -12,12 +12,10 @@ public class Burst : Gun, IHaveSpecial
         magManager.InitMag(10);
     }
 
-    public new void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
-        if (magManager.GetBullet())
-        {
-            target.GetShot();
-        }
+        if (magManager.GetBullet()) target.GetShot();
+        else target.EmptyShot();
     }
 
     public void Special(IShootable target)

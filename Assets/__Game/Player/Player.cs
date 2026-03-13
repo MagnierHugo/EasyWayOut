@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IShootable
     [SerializeField] private GameObject ShootOpponentButton = null;
 
     private Gun heldWeapon = null;
+    private bool shotSelf = false;
 
     // You would drag your UI Canvas holding the "Shoot Self" and "Shoot Opponent" buttons here
     // public GameObject actionUI; 
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour, IShootable
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at themselves.");
 
         // PLAY ANIMATION HERE: Point gun at own head
+
+        shotSelf = true;
         heldWeapon.Shoot(this);
     }
 
@@ -80,17 +83,31 @@ public class Player : MonoBehaviour, IShootable
         else { gameManager.PlayerDied(); }
     }
 
+    public void EmptyShot()
+    {
+        if (!shotSelf)
+            gameManager.ChangeWeaponSide();
+        else
+            gameManager.PlayTurn();
+
+        shotSelf = false; 
+    }
+
     public void ChangeTarget(bool isAimingAtSelf, bool canShoot)
     {
-        if (canShoot)
+        if (!isOpponent)
         {
-            if (isAimingAtSelf) { ShootSelfButton.SetActive(true); }
-            else { ShootOpponentButton.SetActive(true); }
-        }
-        else
-        {
-            ShootSelfButton.SetActive(false);
-            ShootOpponentButton.SetActive(false);
+
+            if (canShoot)
+            {
+                if (isAimingAtSelf) { ShootSelfButton.SetActive(true); }
+                else { ShootOpponentButton.SetActive(true); }
+            }
+            else
+            {
+                ShootSelfButton.SetActive(false);
+                ShootOpponentButton.SetActive(false);
+            }
         }
     }
 

@@ -463,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 2141431852}
   isOpponent: 1
-  otherPlayer: {fileID: 0}
+  otherPlayer: {fileID: 1567480662}
   ShootSelfButton: {fileID: 0}
   ShootOpponentButton: {fileID: 0}
 --- !u!1 &224573636
@@ -914,7 +914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171978667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -981,7 +981,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1567480662}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Shoot
+        m_MethodName: ShootSelf
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1047,7 +1047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1192623057
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1114,7 +1114,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1567480662}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Shoot
+        m_MethodName: ShootOpponent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829d8014733fe0947b5bec6c9b050f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1567480662}
   armPivot: {fileID: 655922558}
   handPivot: {fileID: 1697218500}
 --- !u!114 &1567480662

@@ -19,12 +19,26 @@ public class GameManager : MonoBehaviour
 
     private bool playerHasGun = true;
     private List<int> weaponList = new List<int> { 0, 1, 2, 3 };
+    private Vector3 spawnPos = new Vector3(0.7f, 2, 1.7f);
 
     public Gun currentWeapon;
 
     private void Start()
     {
-        StartNewRound();
+        InitGame();
+    }
+
+    private void InitGame()
+    {
+        currentRound = 0;
+
+        GameObject spawnedObject = Instantiate(revolverPrefab, spawnPos, Quaternion.identity);
+        currentWeapon = spawnedObject.GetComponent<Gun>();
+
+        player.EquipWeapon(currentWeapon);
+        opponent.EquipWeapon(currentWeapon);
+        PlayTurn();
+
     }
 
     private void StartNewRound()
@@ -38,15 +52,15 @@ public class GameManager : MonoBehaviour
         PlayTurn();
     }
 
-    private void PlayTurn()
+    public void PlayTurn()
     {
         if (playerHasGun)
         {
-            // player.MakeAChoice();
+            player.MakeAChoice();
         }
         else
         {
-            // opponent.MakeAutoChoice();
+            opponent.MakeAutoChoice();
         }
 
         // The game now waits here. 

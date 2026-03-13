@@ -8,6 +8,14 @@ public class MagManager {
 
     public void InitMag(int MagCount) {
         Slots = new List<bool>(MagCount);
+
+        for (int i = 0; i < MagCount; i++)
+        {
+            Slots.Add(false);
+        }
+
+        Slots[0] = true;
+
         CurrentIndex = Random.Range(0, Slots.Count);
     }
         
@@ -19,7 +27,8 @@ public class MagManager {
 
 
     public void AddBullet() {
-        for (int idx = 0; idx < Slots.Count; idx++) {
+        for (int idx = 0; idx < Slots.Count; idx++)
+        {
             if (Slots[idx] == false) {
                 Slots[idx] = true;
                 return;
@@ -29,6 +38,7 @@ public class MagManager {
     }
 
     public bool GetBullet() {
+        Debug.Log(CurrentIndex);
         return Slots[CurrentIndex];
     }
     
