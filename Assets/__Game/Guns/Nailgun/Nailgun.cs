@@ -1,11 +1,7 @@
 using UnityEngine;
 
-public class Nailgun : Gun, IHaveSpecial
+public sealed class Nailgun : Gun, IHaveSpecial
 {
-
-    private readonly Mag mag = new Mag();
-
-
     public bool canTargetOpponent = false;
 
     private bool canShootHand = true;

@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Mag {
     [SerializeField] private List<bool> slots = new List<bool>();
+
+    private int numberOfBullets = 1;
+    private int numberOfChamberLeft = 0;
     private int currentIndex = 0;
 
     public void Init(int MagCount) {
@@ -13,6 +16,7 @@ public class Mag {
         for (int i = 0; i < MagCount; i++)
             slots.Add(false);
 
+        numberOfChamberLeft = MagCount;
         slots[0] = true;
 
         currentIndex = Random.Range(0, slots.Count);
@@ -33,6 +37,8 @@ public class Mag {
         for (int idx = 0; idx < slots.Count; idx++) {
             if (slots[idx] == false) {
                 slots[idx] = true;
+                numberOfBullets++;
+                numberOfChamberLeft++;
                 return;
             }
         }
@@ -46,4 +52,7 @@ public class Mag {
         currentIndex = (currentIndex + 1) % slots.Count;
         return bullet;
     }
+
+    public float GetNumberOfBullets() => numberOfBullets;
+    public float GetNumberOfChamberLeft() => numberOfChamberLeft;
 }

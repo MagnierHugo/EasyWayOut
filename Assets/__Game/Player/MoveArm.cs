@@ -9,6 +9,9 @@ public class MoveArm : MonoBehaviour
     [SerializeField] private GameObject armPivot = null;
     [SerializeField] private GameObject handPivot = null;
 
+    private Vector3 gunPickupPos = new Vector3(.088f, .2f, 0f);
+    private Quaternion gunPickupRot = Quaternion.Euler(0f, 0f, 7.13f);
+
     private float minArmRotation = -50f;
     private float maxArmRotation = 10f;
     private float minHandRotation = -45f;

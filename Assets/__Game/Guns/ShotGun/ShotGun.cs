@@ -8,6 +8,7 @@ public sealed class Shotgun : MonoBehaviour, IShoot
     private readonly Mag mag = new Mag();
 
     private ParticleSystem muzzleFlash;
+    
     private AudioSource audioSource;
     [SerializeField] private AudioClip pumpingAudio;
     [SerializeField] private AudioClip gunShotAudio;

@@ -15,7 +15,10 @@ public class DoubleBarrel : Gun, IHaveSpecial
         Debug.Log("Double");
 
         foreach (Mag mag in mags)
-            mag.Init(6);
+
+            mag.InitMag(6);
+        
+        mag = mags[currentMag];
     }
 
     public override void Shoot(IShootable target)
@@ -40,5 +43,13 @@ public class DoubleBarrel : Gun, IHaveSpecial
 
         currentMag = currentMag == 0 ? 1 : 0;
         lastSwitch = target;
+    }
+
+    public Mag GetOtherMag()
+    {
+        if (currentMag == 0)
+            return mags[1];
+        else
+            return mags[0];
     }
 }
