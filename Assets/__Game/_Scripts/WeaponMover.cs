@@ -7,12 +7,12 @@ public class WeaponMover : MonoBehaviour
     public float moveDuration = 1.0f;
 
     // Player side
-    private Vector3 playerPos = new Vector3(0.6f, 2.07f, 2.7f);
-    private Quaternion playerRot = Quaternion.Euler(0, -90, 90);
+    [SerializeField] private Vector3 playerPos;
+    [SerializeField] private Quaternion playerRot;
     
     // Opponent side
-    private Vector3 opponentPos = new Vector3(0.8f, 2.07f, 0.6f);
-    private Quaternion opponentRot = Quaternion.Euler(0, 90, 90);
+    [SerializeField] private Vector3 opponentPos;
+    [SerializeField] private Quaternion opponentRot;
 
     public void SlideToOpponent()
     {

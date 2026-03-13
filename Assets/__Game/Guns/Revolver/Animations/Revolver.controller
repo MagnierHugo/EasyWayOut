@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b73d7b5d6e3d44baf87af64add7d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StateName: Cock hammer
 --- !u!1102 &-6440824890653449479
 AnimatorState:
   serializedVersion: 6
@@ -82,7 +83,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1724126957918217114}
   - {fileID: -1761471170800890006}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 7058492490711156936}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 0
@@ -318,3 +320,16 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &7058492490711156936
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b73d7b5d6e3d44baf87af64add7d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateName: Fire

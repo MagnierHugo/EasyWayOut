@@ -4861,7 +4861,7 @@ Transform:
   m_GameObject: {fileID: 8066919273203042049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -21.259, z: -0}
+  m_LocalPosition: {x: 0, y: -100, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4923,7 +4923,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.56e-41, y: 2.524355e-29, z: 0, w: 4.2190695e+29}
+  m_BoundingSphereOverride: {x: 3.5444e-41, y: 2.524355e-29, z: 0, w: 2.2227777e-38}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0

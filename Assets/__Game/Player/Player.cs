@@ -11,10 +11,11 @@ public class Player : MonoBehaviour, IShootable
     [SerializeField] private Player otherPlayer = null;
     [SerializeField] private GameObject ShootSelfButton = null;
     [SerializeField] private GameObject ShootOpponentButton = null;
+    [SerializeField] private GameObject SpecialButton = null;
 
     private Gun heldWeapon = null;
     private bool shotSelf = false;
-    private bool canUseSpecial = false;
+    private bool weaponHasSpecial = false;
 
     // You would drag your UI Canvas holding the "Shoot Self" and "Shoot Opponent" buttons here
     // public GameObject actionUI; 
@@ -58,6 +59,16 @@ public class Player : MonoBehaviour, IShootable
         //}
     }
 
+    private void Shoot(IShootable target)
+    {
+        heldWeapon.Shoot(target);
+
+        if (isOpponent) return;
+        SpecialButton.SetActive(false);
+        ShootSelfButton.SetActive(false);
+        ShootOpponentButton.SetActive(false);
+    }
+
     public void ShootSelf()
     {
         // actionUI.SetActive(false); // Hide the buttons once a choice is made
@@ -65,9 +76,8 @@ public class Player : MonoBehaviour, IShootable
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at themselves.");
 
         // PLAY ANIMATION HERE: Point gun at own head
-
         shotSelf = true;
-        heldWeapon.Shoot(this);
+        Shoot(this);
     }
 
     public void ShootOpponent()
@@ -77,7 +87,7 @@ public class Player : MonoBehaviour, IShootable
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at the enemy.");
 
         // PLAY ANIMATION HERE: Point gun at enemy
-        heldWeapon.Shoot(otherPlayer);
+        Shoot(otherPlayer);
     }
 
     public void UseSpecial()
@@ -103,24 +113,25 @@ public class Player : MonoBehaviour, IShootable
 
     public void ChangeTarget(bool isAimingAtSelf, bool canShoot)
     {
-        if (!isOpponent)
-        {
+        if (isOpponent || !gameManager.playerHasGun) return;
 
-            if (canShoot)
-            {
-                if (isAimingAtSelf) { ShootSelfButton.SetActive(true); }
-                else { ShootOpponentButton.SetActive(true); }
-            }
-            else
-            {
-                ShootSelfButton.SetActive(false);
-                ShootOpponentButton.SetActive(false);
-            }
+        if (canShoot)
+        {
+            if (weaponHasSpecial) SpecialButton.SetActive(true);
+
+            if (isAimingAtSelf) { ShootSelfButton.SetActive(true); }
+            else { ShootOpponentButton.SetActive(true); }
+            return;
         }
+
+        SpecialButton.SetActive(false);
+        ShootSelfButton.SetActive(false);
+        ShootOpponentButton.SetActive(false);
     }
 
     public void EquipWeapon(Gun newWeapon)
     {
         heldWeapon = newWeapon;
+        weaponHasSpecial = heldWeapon is IHaveSpecial;
     }
 }
