@@ -524,15 +524,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.size
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[0].Text
-      value: Test, This is a test
+      value: Welcome to EasyWayOut !
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[1].Text
-      value: Test, This is a test
+      value: Where you are going to play russain roulette.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[2].Text
+      value: You will both take turns...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[3].Text
+      value: 'When it''s your turn you''ll have 3 choices:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[4].Text
+      value: Shoot at yourself.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[5].Text
+      value: Shoot the opponent.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[6].Text
+      value: Or do something special.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[7].Text
+      value: But be carefull...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[8].Text
+      value: This isn't an ordinary game of Russian Roulette...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[9].Text
+      value: 'There are 5 different guns:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[10].Text
+      value: A Revolver.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[11].Text
+      value: A Double-Barrel.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[12].Text
+      value: The Burst.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[13].Text
+      value: A Shotgun.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[14].Text
+      value: And finally a Nailgun.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[15].Text
+      value: Good luck
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[0].Duration
@@ -540,7 +596,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[1].Duration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[2].Duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[3].Duration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[4].Duration
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[5].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[6].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[7].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[8].Duration
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[9].Duration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[10].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[11].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[12].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[13].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[14].Duration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[15].Duration
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5787878229339028299, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -585,6 +697,10 @@ PrefabInstance:
     - target: {fileID: 6369403566668578069, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: m_Name
       value: CinematicHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377868338582530769, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: m_TextWrappingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
