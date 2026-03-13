@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IShootable
 
     private Gun heldWeapon = null;
     private bool shotSelf = false;
+    private bool canUseSpecial = false;
 
     // You would drag your UI Canvas holding the "Shoot Self" and "Shoot Opponent" buttons here
     // public GameObject actionUI; 
@@ -77,6 +78,11 @@ public class Player : MonoBehaviour, IShootable
 
         // PLAY ANIMATION HERE: Point gun at enemy
         heldWeapon.Shoot(otherPlayer);
+    }
+
+    public void UseSpecial()
+    {
+
     }
 
     public void GetShot()

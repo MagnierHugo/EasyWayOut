@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Revolver : Gun, IHaveSpecial
 {
-    private Mag mag = new Mag();
-
     private void Awake()
     {
         Debug.Log("Revolver");
