@@ -54,7 +54,6 @@ public class Player : MonoBehaviour, IShootable
 
     public void ShootSelf()
     {
-        // actionUI.SetActive(false); // Hide the buttons once a choice is made
 
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at themselves.");
 
@@ -65,8 +64,6 @@ public class Player : MonoBehaviour, IShootable
 
     public void ShootOpponent()
     {
-        // actionUI.SetActive(false); 
-
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at the enemy.");
 
         // PLAY ANIMATION HERE: Point gun at enemy

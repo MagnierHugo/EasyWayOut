@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int currentRound = 0;
     [SerializeField] private Player player;
     [SerializeField] private Player opponent;
+    [SerializeField] private GameObject opponentGameObject;
 
     [Header("Guns Prefab")]
     [SerializeField] private GameObject revolverPrefab = null;
@@ -62,6 +63,12 @@ public class GameManager : MonoBehaviour
     private void StartNewRound()
     {
         currentRound++;
+        if (currentRound == 1) // should be 5 here
+        {
+            JustOneLastGame();
+            return;
+        }
+
         lightingManager.ChangeRound(currentRound);
 
         opponent.UpdatePersonality(currentRound);
@@ -163,10 +170,16 @@ public class GameManager : MonoBehaviour
 
             currentWeapon = spawnedObject.GetComponent<Gun>();
 
-            Debug.Log(currentWeapon.name);
-
             player.EquipWeapon(currentWeapon);
             opponent.EquipWeapon(currentWeapon);
         }
+    }
+
+    private void JustOneLastGame()
+    {
+        opponentGameObject.SetActive(false);
+
+        GameObject spawnedObject = Instantiate(revolverPrefab, spawnPos, Quaternion.identity);
+        currentWeapon = spawnedObject.GetComponent<Gun>();
     }
 }
