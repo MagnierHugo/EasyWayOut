@@ -72,7 +72,14 @@ public class Player : MonoBehaviour, IShootable
 
     public void UseSpecial()
     {
+        if (!weaponHasSpecial) return;
 
+        (heldWeapon as IHaveSpecial).Special(this);
+
+        if (isOpponent) return;
+        SpecialButton.SetActive(false);
+        ShootSelfButton.SetActive(false);
+        ShootOpponentButton.SetActive(false);
     }
 
     public void GetShot()
