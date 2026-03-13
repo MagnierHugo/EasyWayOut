@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
         SpawnRandomWeapon();
 
-        // Reset the gun to the player for the start of the round
         playerHasGun = true;
         PlayTurn();
     }
@@ -47,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void ChangeWeaponSide()
     {
-        // Flip the boolean
         playerHasGun = !playerHasGun;
 
         if (playerHasGun)
@@ -80,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         if (weaponList.Count == 0)
         {
+
             Debug.LogWarning("No more weapons in the list!");
             return;
         }

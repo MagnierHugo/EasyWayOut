@@ -5,6 +5,7 @@ public class MoveArm : MonoBehaviour
 {
     private PlayerControls controls;
 
+    [SerializeField] private Player player = null;
     [SerializeField] private GameObject armPivot = null;
     [SerializeField] private GameObject handPivot = null;
 
@@ -51,10 +52,19 @@ public class MoveArm : MonoBehaviour
 
             armPivot.transform.localRotation = Quaternion.Euler(currentAngleX, 0, 0);
 
+            if (currentAngleX >= maxArmRotation -1) { ChangeTarget(true, true); }
+            else if (currentAngleX <= minArmRotation + 1) { ChangeTarget(false, true); }
+            else { ChangeTarget(true, false); }
+
+
 
             currentHandAngleX = Mathf.Clamp(currentAngleX, minHandRotation, maxHandRotation);
-
             handPivot.transform.localRotation = Quaternion.Euler(currentHandAngleX, 0, 0);
         }
+    }
+
+    private void ChangeTarget(bool isAimingAtSelf, bool canShoot)
+    {
+        player.ChangeTarget(isAimingAtSelf, canShoot);
     }
 }
