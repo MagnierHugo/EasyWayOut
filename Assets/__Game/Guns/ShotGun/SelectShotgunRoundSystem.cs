@@ -68,8 +68,6 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
     private void StartRoundSelectionSequence()
     {
-        readyToSelect = true;
-
         if (hovered != null)
             ClearHovered();
 
@@ -77,7 +75,7 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         StartCoroutine(
             MoveRoundsIntoView(
                 demonstrationSequenceOver ? 
-                    () => { } :
+                    () => readyToSelect = true :
                     () => { StartCoroutine(PlayRoundSelectionDemonstration()); }
             )
         );
@@ -85,12 +83,17 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
     private void SpawnRounds()
     {
+        blankRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        liveRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
+
         blankRoundInstance.gameObject.SetActive(true);
         liveRoundInstance.gameObject.SetActive(true);
     }
     private bool forceStopMovement;
     private IEnumerator MoveRoundsIntoView(Action callback)
     {
+        Debug.Log("Started lerp");
+        forceStopMovement = false;
         float elapsed = 0;
         yield return new WaitUntil(
             () =>
@@ -115,6 +118,7 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         );
 
         forceStopMovement = false;
+        Debug.Log("Ended lerp");
         callback?.Invoke();
     }
 
@@ -128,8 +132,6 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
         liveRoundInstance.OnHoverExit();
         StartCoroutine(StartRoundSelectedSequence(true));
-
-        demonstrationSequenceOver = true;
     }
     private IEnumerator StartRoundSelectedSequence(bool selectedLiveOne)
     {
@@ -152,6 +154,7 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
         yield return awaitDurationBetweenSelections;
 
+        demonstrationSequenceOver = true;
         if (roundLeftToSelect > 0)
             StartRoundSelectionSequence();
         else
@@ -160,12 +163,12 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
     private void ClearRounds(Rigidbody relevantRigidbody)
     {
+        Debug.Log(nameof(ClearRounds));
+
         Destroy(relevantRigidbody);
 
         blankRoundInstance.gameObject.SetActive(false);
         liveRoundInstance.gameObject.SetActive(false);
-        blankRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        liveRoundInstance.transform.SetPositionAndRotation(transform.position, transform.rotation);
     }
 
     private void Update()
