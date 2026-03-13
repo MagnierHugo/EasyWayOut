@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Nailgun : MonoBehaviour, IShoot, IHaveSpecial
+public class Nailgun : Gun, IHaveSpecial
 {
-    private MagManager magManager;
+    private Mag mag = new Mag();
 
     public bool canTargetOpponent = false;
 
@@ -11,30 +11,37 @@ public class Nailgun : MonoBehaviour, IShoot, IHaveSpecial
 
     private void Start()
     {
+        Debug.Log("Nailgun");
         // Init mag with 11 chambers and 3 bullets
-        magManager.InitMag(11);
-        magManager.AddBullet();
-        magManager.Shuffle();
-        magManager.AddBullet();
-        magManager.Shuffle();
+        mag.InitMag(11);
+        mag.AddBullet();
+        mag.ShuffleShift();
+        mag.AddBullet();
+        mag.ShuffleShift();
     }
 
-
-    public void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
-        if (magManager.GetBullet())
+        if (mag.GetBullet())
         {
+            Debug.Log("BANG!");
             target.GetShot();
         }
+        else
+        {
+            Debug.Log("Click.");
+            target.EmptyShot();
+        }
 
-        if(!canShootHand && !isHandNailed) { canShootHand = true;}
+
+        if (!canShootHand && !isHandNailed) { canShootHand = true; }
     }
 
     public void Special(IShootable target)
     {
         if (canShootHand)
         {
-            if (magManager.GetBullet())
+            if (mag.GetBullet())
             {
                 // Call shoot Hand animation (Nail version)
                 isHandNailed = true;

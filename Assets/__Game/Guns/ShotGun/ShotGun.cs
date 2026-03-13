@@ -1,27 +1,33 @@
 using UnityEngine;
 
-public class ShotGun : MonoBehaviour, IShoot {
-    private MagManager magManager;
+public class ShotGun : Gun {
+    private Mag mag = new Mag();
     private int RemainingBulletsToAdd = 2;
 
     void Start() {
-        magManager.InitMag(8);
+        Debug.Log("Shotgun");
+        mag.InitMag(8);
     }
 
     public void ManualyLoadBullet() {
         if (RemainingBulletsToAdd > 0) {
-            magManager.AddBullet();
-            magManager.Shuffle();
+            mag.AddBullet();
+            mag.ShuffleShift();
             RemainingBulletsToAdd--;
         }
     }
 
-    public void Shoot(IShootable target) {
-        if (target == null) return;
-        if (magManager.GetBullet()) {
+    public override void Shoot(IShootable target)
+    {
+        if (mag.GetBullet())
+        {
+            Debug.Log("BANG!");
             target.GetShot();
-        } else {
-            magManager.ShootBullet();
+        }
+        else
+        {
+            Debug.Log("Click.");
+            target.EmptyShot();
         }
     }
 }
