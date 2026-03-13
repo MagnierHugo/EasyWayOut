@@ -1376,6 +1376,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2727226451211395643, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: m_SpotAngle
+      value: 73.227264
+      objectReference: {fileID: 0}
+    - target: {fileID: 2727226451211395643, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 28.219696
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972018066956080881, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: m_SpotAngle
+      value: 45.848484
+      objectReference: {fileID: 0}
     - target: {fileID: 7539909433634270085, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
       propertyPath: m_Name
       value: Room
