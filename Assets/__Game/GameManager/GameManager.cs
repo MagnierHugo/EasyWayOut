@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -61,6 +63,8 @@ public class GameManager : MonoBehaviour
     {
         currentRound++;
         lightingManager.ChangeRound(currentRound);
+
+        opponent.UpdatePersonality(currentRound);
 
         SpawnRandomWeapon();
 

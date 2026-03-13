@@ -466,6 +466,7 @@ MonoBehaviour:
   otherPlayer: {fileID: 1567480662}
   ShootSelfButton: {fileID: 0}
   ShootOpponentButton: {fileID: 0}
+  SpecialButton: {fileID: 0}
 --- !u!1 &224573636
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,11 +745,6 @@ Transform:
   - {fileID: 1990860349}
   m_Father: {fileID: 1567480660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &665101460 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7284692189141927658, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
-  m_PrefabInstance: {fileID: 2336107350005002400}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &758263155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1589,6 +1585,7 @@ MonoBehaviour:
   otherPlayer: {fileID: 173707208}
   ShootSelfButton: {fileID: 1171978666}
   ShootOpponentButton: {fileID: 1192623056}
+  SpecialButton: {fileID: 1921368254}
 --- !u!1 &1604595294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1955,7 @@ GameObject:
   - component: {fileID: 1921368257}
   - component: {fileID: 1921368256}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: SpecialButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2571,6 +2568,7 @@ MonoBehaviour:
   shotgunPrefab: {fileID: 469197353882733357, guid: c7ba61c45980c1e449ed800d355105de, type: 3}
   doubleBarrelPrefab: {fileID: 453417526943293218, guid: 2c3157891147170408e096611ef56374, type: 3}
   burstPrefab: {fileID: 2261906363069772897, guid: fe146b8c8b25cce4e877ed983863ee52, type: 3}
+  playerHasGun: 1
   currentWeapon: {fileID: -7045903433310340533, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
 --- !u!4 &2141431853
 Transform:
@@ -2793,7 +2791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
 --- !u!114 &2336107350005002401 stripped
