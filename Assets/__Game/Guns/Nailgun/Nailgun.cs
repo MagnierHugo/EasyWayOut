@@ -13,9 +13,9 @@ public class Nailgun : Gun, IHaveSpecial
         // Init mag with 11 chambers and 3 bullets
         mag.InitMag(11);
         mag.AddBullet();
-        mag.Shuffle();
+        mag.ShuffleShift();
         mag.AddBullet();
-        mag.Shuffle();
+        mag.ShuffleShift();
     }
 
     public override void Shoot(IShootable target)

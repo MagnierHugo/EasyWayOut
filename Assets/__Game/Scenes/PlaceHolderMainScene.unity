@@ -2462,67 +2462,9 @@ Transform:
   m_LocalScale: {x: 5, y: 4, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1407909433}
   - {fileID: 1604595295}
   m_Father: {fileID: 1990860349}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1749500133
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1697218501}
-    m_Modifications:
-    - target: {fileID: 4660989904674904009, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_Name
-      value: revolver_1_high
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.02353996
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.08708
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0035200403
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5468769845164379507, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
 --- !u!1 &1849177283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3358,7 +3300,7 @@ MonoBehaviour:
   currentRound: 0
   player: {fileID: 1567480662}
   opponent: {fileID: 173707208}
-  revolverPrefab: {fileID: 4660989904674904009, guid: e1bafefa85c72834fb1145a6f1807428, type: 3}
+  revolverPrefab: {fileID: 6871711406287233176, guid: fdfb0fb7c08130345b2cc54f3de3c362, type: 3}
   nailgunPrefab: {fileID: 7724015520100769085, guid: ab174ed655ec6a14983bdeed5bbd4e96, type: 3}
   shotgunPrefab: {fileID: 469197353882733357, guid: c7ba61c45980c1e449ed800d355105de, type: 3}
   doubleBarrelPrefab: {fileID: 453417526943293218, guid: 2c3157891147170408e096611ef56374, type: 3}

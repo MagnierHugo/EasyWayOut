@@ -12,7 +12,7 @@ public class ShotGun : Gun
     public void ManualyLoadBullet() {
         if (RemainingBulletsToAdd > 0) {
             mag.AddBullet();
-            mag.Shuffle();
+            mag.ShuffleShift();
             RemainingBulletsToAdd--;
         }
     }

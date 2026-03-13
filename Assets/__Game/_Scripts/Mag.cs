@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -24,9 +24,15 @@ public class Mag {
         currentIndex = Random.Range(0, slots.Count);
     }
 
-    public void Shuffle() {
+    public void ShuffleShift() {
         int ShuffleForce = Random.Range(5, 11);
         currentIndex = (currentIndex + ShuffleForce) % slots.Count;
+    }
+
+    public void ShuffleRandom()
+    {
+        var rand = new System.Random();
+        slots = slots.OrderBy(item => rand.Next()).ToList();
     }
 
     public void AddBullet() {
