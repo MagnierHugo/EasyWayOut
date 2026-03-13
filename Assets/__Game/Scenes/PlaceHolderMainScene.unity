@@ -1376,6 +1376,130 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2972018066956080881, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: m_Intensity
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[0].intensity
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[0].spotAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[1].intensity
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[1].spotAngle
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[2].intensity
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[2].spotAngle
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[3].intensity
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[3].spotAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[4].intensity
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[4].spotAngle
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].intensity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].spotAngle
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[1].lightColor.b
+      value: 0.8349056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[1].lightColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[1].lightColor.r
+      value: 0.96646523
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[2].lightColor.b
+      value: 0.8349056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[2].lightColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[2].lightColor.r
+      value: 0.96646523
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[3].lightColor.b
+      value: 0.8349056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[3].lightColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[3].lightColor.r
+      value: 0.96646523
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[4].lightColor.b
+      value: 0.8349056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[4].lightColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[4].lightColor.r
+      value: 0.96646523
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].lightColor.b
+      value: 0.8349056
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].lightColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].lightColor.r
+      value: 0.96646523
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].enableFlicker
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959952791635830721, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
+      propertyPath: rounds.Array.data[5].enableInsanityPostProcess
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7539909433634270085, guid: f0f1e656b5ba7af4eb338a0437814a14, type: 3}
       propertyPath: m_Name
       value: Room
