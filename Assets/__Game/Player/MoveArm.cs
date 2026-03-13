@@ -11,8 +11,8 @@ public class MoveArm : MonoBehaviour
 
     private float minArmRotation = -50f;
     private float maxArmRotation = 10f;
-    private float minHandRotation = -25f;
-    private float maxHandRotation = 30f;
+    private float minHandRotation = -45f;
+    private float maxHandRotation = 45f;
 
     private float stepSize = 5f;
     private float currentAngleX = 0f;
@@ -45,7 +45,7 @@ public class MoveArm : MonoBehaviour
 
             currentAngleX += stepSize * direction;
 
-            currentHandAngleX += stepSize * direction;
+            currentHandAngleX += stepSize * 1.5f * direction;
 
 
             currentAngleX = Mathf.Clamp(currentAngleX, minArmRotation, maxArmRotation);
@@ -58,7 +58,7 @@ public class MoveArm : MonoBehaviour
 
 
 
-            currentHandAngleX = Mathf.Clamp(currentAngleX, minHandRotation, maxHandRotation);
+            currentHandAngleX = Mathf.Clamp(currentHandAngleX, minHandRotation, maxHandRotation);
             handPivot.transform.localRotation = Quaternion.Euler(currentHandAngleX, 0, 0);
         }
     }

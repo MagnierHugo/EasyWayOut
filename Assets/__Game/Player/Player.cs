@@ -45,7 +45,7 @@ public class Player : MonoBehaviour, IShootable
     {
         yield return new WaitForSeconds(1.5f);
 
-        ShootSelf();
+        ShootOpponent();
 
         //if (choice > 0.5f)
         //{
