@@ -9,7 +9,7 @@ public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
         magManager.InitMag(6);
     }
 
-    public void Shoot(Player target)
+    public void Shoot(IShootable target)
     {
         if(magManager.GetBullet())
         {
@@ -17,7 +17,7 @@ public class Revolver : MonoBehaviour, IShoot, IHaveSpecial
         }
     }
 
-    public void Special(Player target)
+    public void Special(IShootable target)
     {
         magManager.AddBullet();
         magManager.Shuffle();

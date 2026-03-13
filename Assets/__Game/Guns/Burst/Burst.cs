@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Busrt : MonoBehaviour, IShoot, IHaveSpecial
+public class Burst : MonoBehaviour, IShoot, IHaveSpecial
 {
     private MagManager magManager;
 
@@ -12,7 +12,7 @@ public class Busrt : MonoBehaviour, IShoot, IHaveSpecial
         magManager.InitMag(10);
     }
 
-    public void Shoot(Player target)
+    public void Shoot(IShootable target)
     {
         if (magManager.GetBullet())
         {
@@ -20,7 +20,7 @@ public class Busrt : MonoBehaviour, IShoot, IHaveSpecial
         }
     }
 
-    public void Special(Player target)
+    public void Special(IShootable target)
     {
         Shoot(target);
         Shoot(target);
