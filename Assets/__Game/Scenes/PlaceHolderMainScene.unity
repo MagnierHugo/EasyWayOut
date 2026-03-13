@@ -527,8 +527,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[0].Text
+      value: Test, This is a test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[1].Text
       value: Test, This is a test
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
+      propertyPath: inspectorTexts.Array.data[0].Duration
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5440475093846218030, guid: be59359c2cd32734cac73709fd13dbcf, type: 3}
       propertyPath: inspectorTexts.Array.data[1].Duration

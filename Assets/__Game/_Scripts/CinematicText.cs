@@ -32,7 +32,9 @@ public class CinematicText : MonoBehaviour {
 
     void Start() {
         textRectTransform = displayText.GetComponent<RectTransform>();
-        originalPosition = textRectTransform.anchoredPosition;
+        originalPosition = textRectTransform.anchoredPosition;  
+
+        displayText.text = "";
 
         if (displayBlur != null) {
             originalBlurAlpha = displayBlur.color.a;
@@ -49,7 +51,6 @@ public class CinematicText : MonoBehaviour {
         if (textsToDisplay.Count > 0) {
             StartDisplaySequence();
         }
-        displayText.text = "";
     }
 
     public void UpdateDisplaySequence(List<TextItem> Sequences) {
