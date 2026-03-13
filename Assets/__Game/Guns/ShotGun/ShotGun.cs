@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class ShotGun : Gun {
-    private MagManager magManager;
+    private Mag magManager;
     private int RemainingBulletsToAdd = 2;
 
     void Start() {
@@ -16,12 +16,10 @@ public class ShotGun : Gun {
         }
     }
 
-    public new void Shoot(IShootable target) {
-        if (target == null) return;
+    public override void Shoot(IShootable target)
+    {
         if (magManager.GetBullet()) {
             target.GetShot();
-        } else {
-            magManager.ShootBullet();
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Nailgun : Gun, IHaveSpecial
 {
-    private MagManager magManager;
+    private Mag magManager;
 
     public bool canTargetOpponent = false;
 
@@ -19,8 +19,7 @@ public class Nailgun : Gun, IHaveSpecial
         magManager.Shuffle();
     }
 
-
-    public new void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
         if (magManager.GetBullet())
         {

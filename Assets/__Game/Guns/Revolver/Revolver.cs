@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Revolver : Gun, IHaveSpecial
 {
-    private MagManager magManager;
+    private Mag magManager;
 
     private void Start()
     {
         magManager.InitMag(6);
     }
 
-    public new void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
         if(magManager.GetBullet())
         {
