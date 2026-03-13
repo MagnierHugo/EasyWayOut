@@ -7,7 +7,15 @@ public class Mag {
     private int currentIndex = 0;
 
     public void InitMag(int MagCount) {
-        slots = new List<bool>(MagCount);
+        slots = new List<bool>();
+
+        for (int i = 0; i < MagCount; i++)
+        {
+            slots.Add(false);
+        }
+
+        slots[0] = true;
+
         currentIndex = Random.Range(0, slots.Count);
     }
 
@@ -27,6 +35,7 @@ public class Mag {
     }
 
     public bool GetBullet() {
+        Debug.Log(currentIndex);
         bool bullet = slots[currentIndex];
         slots[currentIndex] = false;
         currentIndex = (currentIndex + 1) % slots.Count;

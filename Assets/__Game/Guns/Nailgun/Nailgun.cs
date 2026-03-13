@@ -11,6 +11,7 @@ public class Nailgun : Gun, IHaveSpecial
 
     private void Start()
     {
+        Debug.Log("Nailgun");
         // Init mag with 11 chambers and 3 bullets
         mag.InitMag(11);
         mag.AddBullet();
@@ -21,8 +22,16 @@ public class Nailgun : Gun, IHaveSpecial
 
     public override void Shoot(IShootable target)
     {
-        if (mag.GetBullet()) target.GetShot();
-        else target.EmptyShot();
+        if (mag.GetBullet())
+        {
+            Debug.Log("BANG!");
+            target.GetShot();
+        }
+        else
+        {
+            Debug.Log("Click.");
+            target.EmptyShot();
+        }
 
 
         if (!canShootHand && !isHandNailed) { canShootHand = true; }

@@ -45,14 +45,16 @@ public class Player : MonoBehaviour, IShootable
     {
         yield return new WaitForSeconds(1.5f);
 
-        if (choice > 0.5f)
-        {
-            ShootSelf();
-        }
-        else
-        {
-            ShootOpponent();
-        }
+        ShootSelf();
+
+        //if (choice > 0.5f)
+        //{
+        //    ShootSelf();
+        //}
+        //else
+        //{
+        //    ShootOpponent();
+        //}
     }
 
     public void ShootSelf()

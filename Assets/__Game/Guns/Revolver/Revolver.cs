@@ -6,6 +6,7 @@ public class Revolver : Gun, IHaveSpecial
 
     private void Awake()
     {
+        Debug.Log("Revolver");
         mag.InitMag(6);
     }
 

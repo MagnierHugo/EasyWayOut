@@ -5,6 +5,7 @@ public class ShotGun : Gun {
     private int RemainingBulletsToAdd = 2;
 
     void Start() {
+        Debug.Log("Shotgun");
         mag.InitMag(8);
     }
 
@@ -18,10 +19,15 @@ public class ShotGun : Gun {
 
     public override void Shoot(IShootable target)
     {
-        if (mag.GetBullet()) {
+        if (mag.GetBullet())
+        {
+            Debug.Log("BANG!");
             target.GetShot();
-        } else {
-            mag.ShootBullet();
+        }
+        else
+        {
+            Debug.Log("Click.");
+            target.EmptyShot();
         }
     }
 }

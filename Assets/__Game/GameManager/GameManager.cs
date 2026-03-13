@@ -137,9 +137,11 @@ public class GameManager : MonoBehaviour
 
         if (weaponToSpawn != null)
         {
-            GameObject spawnedObject = Instantiate(weaponToSpawn, Vector3.zero, Quaternion.identity);
+            GameObject spawnedObject = Instantiate(weaponToSpawn, spawnPos, Quaternion.identity);
 
             currentWeapon = spawnedObject.GetComponent<Gun>();
+
+            Debug.Log(currentWeapon.name);
 
             player.EquipWeapon(currentWeapon);
             opponent.EquipWeapon(currentWeapon);
