@@ -23,7 +23,7 @@ public class Revolver : Gun, IHaveSpecial
 
     public override void Shoot(IShootable target)
     {
-        animator.SetTrigger("Cock Hammer");
+        animator.SetTrigger("Cock Gun");
         audioSource.clip = revolverCockingAudio;
         audioSource.Play();
         var cockBehaviour = animator.GetBehaviour<Cock_Behaviour>();
