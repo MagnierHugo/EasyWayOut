@@ -25,12 +25,8 @@ public sealed class Shotgun : MonoBehaviour, IShoot
             return;
 
         if (magManager.NextBulletIsLive())
-        {
             target.GetShot();
-        }
         else
-        {
             magManager.ShootBullet();
-        }
     }
 }

@@ -1,18 +1,22 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Burst : MonoBehaviour, IShoot, IHaveSpecial
+public class Burst : Gun, IHaveSpecial
 {
-    private readonly MagManager magManager = new MagManager();
+    private readonly Mag mag = new Mag();
 
     public bool canTargetOpponent = false;
 
-    private void Start() => magManager.Init(10);
+    private void Start() => mag.Init(10);
 
-    public void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
-        if (magManager.NextBulletIsLive())
+
+        if (mag.NextBulletIsLive())
             target.GetShot();
+        else
+            target.EmptyShot();
+
     }
 
     public void Special(IShootable target)

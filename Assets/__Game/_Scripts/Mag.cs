@@ -1,0 +1,51 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+[System.Serializable]
+public class Mag {
+    [SerializeField] private List<bool> slots = new List<bool>();
+    private int currentIndex = 0;
+
+    public void InitMag(int MagCount) {
+        slots = new List<bool>();
+
+        for (int i = 0; i < MagCount; i++)
+        {
+            slots.Add(false);
+        }
+
+        slots[0] = true;
+
+        currentIndex = Random.Range(0, slots.Count);
+    }
+
+    public void ShuffleShift() {
+        int ShuffleForce = Random.Range(5, 11);
+        currentIndex = (currentIndex + ShuffleForce) % slots.Count;
+    }
+
+    public void ShuffleRandom()
+    {
+        var rand = new System.Random();
+        slots = slots.OrderBy(item => rand.Next()).ToList();
+    }
+
+    public void AddBullet() {
+        for (int idx = 0; idx < slots.Count; idx++) {
+            if (slots[idx] == false) {
+                slots[idx] = true;
+                return;
+            }
+        }
+        return;
+    }
+
+    public bool GetBullet() {
+        Debug.Log(currentIndex);
+        bool bullet = slots[currentIndex];
+        slots[currentIndex] = false;
+        currentIndex = (currentIndex + 1) % slots.Count;
+        return bullet;
+    }
+}
