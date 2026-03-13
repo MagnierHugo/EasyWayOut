@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject doubleBarrelPrefab = null;
     [SerializeField] private GameObject burstPrefab = null;
 
-    private bool playerHasGun = true;
+    public bool playerHasGun = true;
     private List<int> weaponList = new List<int> { 0, 1, 2, 3 };
     private Vector3 spawnPos = new Vector3(0.7f, 2, 1.7f);
 
@@ -38,7 +38,23 @@ public class GameManager : MonoBehaviour
         player.EquipWeapon(currentWeapon);
         opponent.EquipWeapon(currentWeapon);
         PlayTurn();
+        StartCoroutine(SlideToFirst());
+    }
 
+    private System.Collections.IEnumerator SlideToFirst()
+    {
+        yield return new WaitForSeconds(3f);
+
+        WeaponMover mover = currentWeapon.GetComponent<WeaponMover>();
+
+        if (playerHasGun)
+        {
+            mover.SlideToPlayer();
+        }
+        else
+        {
+            mover.SlideToOpponent();
+        }
     }
 
     private void StartNewRound()
