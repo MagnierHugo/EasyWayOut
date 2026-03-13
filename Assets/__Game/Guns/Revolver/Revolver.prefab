@@ -374,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7087945280437174307, guid: 4581b682c36d87b4b9bbf0a683a23709, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7087945280437174307, guid: 4581b682c36d87b4b9bbf0a683a23709, type: 3}
       propertyPath: LightsModule.intensityCurve.scalar

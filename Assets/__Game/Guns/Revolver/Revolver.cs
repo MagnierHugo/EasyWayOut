@@ -1,9 +1,10 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Revolver : Gun, IHaveSpecial
 {
-    private Mag mag = new Mag();
+    private readonly Mag mag = new Mag();
 
     [Header("Components")]
     [SerializeField] private ParticleSystem muzzleFlash;
@@ -25,41 +26,57 @@ public class Revolver : Gun, IHaveSpecial
     {
         print(animator);
         print(nameof(Shoot));
+
         animator.SetBool("CockGun", true);
-        //animator.Play("Cock hammer");
         audioSource.clip = revolverCockingAudio;
         audioSource.Play();
-        var cockBehaviour = animator.GetBehaviour<Cock_Behaviour>();
+
+        var behaviours = animator.GetBehaviours<OnEndCallbackBehaviour>();
+        OnEndCallbackBehaviour cockBehaviour = behaviours.Where(b => b.StateName == "Cock hammer").Single();
+        OnEndCallbackBehaviour fireBehaviour = behaviours.Where(b => b.StateName == "Fire").Single();
+
+        bool bullet = false;
+
+        void OnFireAnimationEnd()
+        {
+            animator.SetBool("Fire", false);
+            fireBehaviour.onAnimationEnd -= OnFireAnimationEnd;
+
+            if (bullet) target.GetShot();
+            else target.EmptyShot();
+        }
 
         // Would have used lambda but it can't ref itself
         void OnCockingAnimationEnd()
         {
             animator.SetBool("CockGun", false);
-            cockBehaviour.onCockAnimationEnd -= OnCockingAnimationEnd;
-            bool bullet = mag.GetBullet();
+            animator.SetBool("Fire", true);
+
+            cockBehaviour.onAnimationEnd -= OnCockingAnimationEnd;
+            fireBehaviour.onAnimationEnd += OnFireAnimationEnd;
+
+            bullet = mag.GetBullet();
             if (!bullet)
             {
                 Debug.Log("Click.");
-                target.EmptyShot();
                 audioSource.clip = revolverEmptyAudio;
                 audioSource.Play();
+                return;
             }
 
             Debug.Log("BANG!");
-            target.GetShot();
             muzzleFlash.Play();
             audioSource.clip = revolverFireAudio;
             audioSource.Play();
-
         }
 
-        cockBehaviour.onCockAnimationEnd += OnCockingAnimationEnd;
+        cockBehaviour.onAnimationEnd += OnCockingAnimationEnd;
     }
 
     public void Special(IShootable target)
     {
         mag.AddBullet();
-        mag.Shuffle();
+        mag.ShuffleShift();
         Shoot(target);
     }
 

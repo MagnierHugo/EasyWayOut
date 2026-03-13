@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Timeline;
 
-public class Cock_Behaviour : StateMachineBehaviour
+public class OnEndCallbackBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -34,20 +34,14 @@ public class Cock_Behaviour : StateMachineBehaviour
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
 
-    public event System.Action onCockAnimationEnd;
-
-    //public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    base.OnStateUpdate(animator, stateInfo, layerIndex);
-
-    //    Debug.Log(animator);
-    //}
+    [field: SerializeField] public string StateName;
+    public event System.Action onAnimationEnd;
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
         Debug.Log(nameof(OnStateExit));
-        onCockAnimationEnd?.Invoke();
+        onAnimationEnd?.Invoke();
     }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
