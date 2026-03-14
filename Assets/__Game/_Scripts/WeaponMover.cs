@@ -14,6 +14,8 @@ public class WeaponMover : MonoBehaviour
     [SerializeField] private Vector3 opponentPos;
     [SerializeField] private Quaternion opponentRot;
 
+    public GameManager manager;
+
     public void SlideToOpponent()
     {
         StopAllCoroutines();
@@ -46,5 +48,8 @@ public class WeaponMover : MonoBehaviour
         
         transform.position = endPos;
         transform.rotation = endRot;
+
+        yield return new WaitForSeconds(.2f);
+        manager.CurrentPlayerGrabWeapon();
     }
 }

@@ -43,9 +43,10 @@ public class GameManager : MonoBehaviour
 
     private System.Collections.IEnumerator SlideToFirst()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         WeaponMover mover = currentWeapon.GetComponent<WeaponMover>();
+        mover.manager = this;
 
         if (playerHasGun)
         {
@@ -103,6 +104,18 @@ public class GameManager : MonoBehaviour
         Invoke("PlayTurn", mover.moveDuration);
     }
 
+    public void CurrentPlayerGrabWeapon()
+    {
+        if (playerHasGun)
+        {
+            player.StartGrabAnimation();
+        }
+        else
+        {
+            opponent.StartGrabAnimation();
+        }
+    }
+
     public void OpponentDied()
     {
         // Play Change opponent animation
@@ -158,6 +171,7 @@ public class GameManager : MonoBehaviour
             GameObject spawnedObject = Instantiate(weaponToSpawn, spawnPos, Quaternion.identity);
 
             currentWeapon = spawnedObject.GetComponent<Gun>();
+            currentWeapon.GetComponent<WeaponMover>().manager = this;
 
             Debug.Log(currentWeapon.name);
 
