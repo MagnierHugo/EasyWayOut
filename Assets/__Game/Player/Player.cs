@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour, IShootable
 {
@@ -13,6 +14,11 @@ public class Player : MonoBehaviour, IShootable
     [SerializeField] private GameObject ShootSelfButton = null;
     [SerializeField] private GameObject ShootOpponentButton = null;
     [SerializeField] private GameObject SpecialButton = null;
+
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform hand;
+
 
     private Gun heldWeapon = null;
     private bool shotSelf = false;
@@ -113,7 +119,7 @@ public class Player : MonoBehaviour, IShootable
     public void EmptyShot()
     {
         if (!shotSelf)
-            gameManager.ChangeWeaponSide();
+            otherPlayer.animator.SetBool("DropGun", true);
         else
             gameManager.PlayTurn();
 
@@ -138,9 +144,64 @@ public class Player : MonoBehaviour, IShootable
         ShootOpponentButton.SetActive(false);
     }
 
+    public void ChangeTarget(Target target)
+    {
+        if (isOpponent || !gameManager.playerHasGun) return;
+
+        if (target == Target.None)
+        {
+            animator.SetBool("AimNone", true);
+            SpecialButton.SetActive(false);
+            ShootSelfButton.SetActive(false);
+            ShootOpponentButton.SetActive(false);
+            return;
+        }
+
+        if (target == Target.Self) animator.SetBool("AimSelf", true);
+        else animator.SetBool("AimOp", true);
+    }
+
     public void EquipWeapon(Gun newWeapon)
     {
         heldWeapon = newWeapon;
         weaponHasSpecial = heldWeapon is IHaveSpecial;
+    }
+
+    public void GrabWeapon() => heldWeapon.transform.SetParent(hand);
+    public void DropWeapon()
+    {
+        heldWeapon.transform.SetParent(null);
+        print(nameof(DropWeapon));
+    }
+    public void StartGrabAnimation() => animator.SetBool("GrabGun", true);
+
+    public void OnGrabAnimationEnd()
+    {
+        animator.SetBool("GrabGun", false);
+        gameManager.PlayTurn();
+    }
+
+    public void OnDropAnimationEnd()
+    {
+        animator.SetBool("DropGun", false);
+        gameManager.ChangeWeaponSide();
+    }
+
+    public void OnAimSelfAnimationEnd()
+    {
+        animator.SetBool("AimSelf", false);
+        ShootSelfButton.SetActive(true);
+        if (weaponHasSpecial) SpecialButton.SetActive(true);
+    }
+
+    public void OnAimOpponentAnimationEnd()
+    {
+        animator.SetBool("AimOp", false);
+        ShootOpponentButton.SetActive(true);
+    }
+
+    public void OnAimNoneAnimatedEnd()
+    {
+        animator.SetBool("AimNone", false);
     }
 }
