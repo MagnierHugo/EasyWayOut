@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Revolver : Gun, IHaveSpecial
 {
+    private readonly Mag mag = new Mag();
+
     [Header("Components")]
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private Animator animator;
@@ -54,19 +56,18 @@ public class Revolver : Gun, IHaveSpecial
             fireBehaviour.onAnimationEnd += OnFireAnimationEnd;
 
             bullet = mag.GetBullet();
-            if (bullet)
-            {
-                Debug.Log("BANG!");
-                muzzleFlash.Play();
-                audioSource.clip = revolverFireAudio;
-                audioSource.Play();
-            }
-            else
+            if (!bullet)
             {
                 Debug.Log("Click.");
                 audioSource.clip = revolverEmptyAudio;
                 audioSource.Play();
+                return;
             }
+
+            Debug.Log("BANG!");
+            muzzleFlash.Play();
+            audioSource.clip = revolverFireAudio;
+            audioSource.Play();
         }
 
         cockBehaviour.onAnimationEnd += OnCockingAnimationEnd;
@@ -74,8 +75,15 @@ public class Revolver : Gun, IHaveSpecial
 
     public void Special(IShootable target)
     {
+        print(nameof(Special));
         mag.AddBullet();
         mag.ShuffleShift();
         Shoot(target);
+    }
+
+    [ContextMenu("HELP")]
+    public void Help()
+    {
+        var animationState = animator.GetAnimatorTransitionInfo(0);
     }
 }

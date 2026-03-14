@@ -8,7 +8,7 @@ public class Aim : MonoBehaviour
 
     [SerializeField] private Player player;
 
-    private Target target;
+    private Target target = Target.None;
 
     private void Awake()
     {

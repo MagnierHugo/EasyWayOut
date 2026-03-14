@@ -14,7 +14,9 @@ public class Mag {
         slots = new List<bool>();
 
         for (int i = 0; i < MagCount; i++)
+        {
             slots.Add(false);
+        }
 
         numberOfChamberLeft = MagCount;
         slots[0] = true;
