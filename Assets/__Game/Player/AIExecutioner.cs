@@ -86,7 +86,7 @@ public class AIExecutioner : MonoBehaviour
             scores[2] = 0f;
         }
 
-        else if (gun.GetComponent<ShotGun>() != null)
+        else if (gun.GetComponent<Shotgun>() != null)
         {
             scores[0] = 1f - pDeath;
             scores[1] = pDeath;

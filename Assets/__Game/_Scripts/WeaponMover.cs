@@ -39,15 +39,16 @@ public class WeaponMover : MonoBehaviour
             // so the gun is slow then fast then slow again
             float smoothT = t * t * (3f - 2f * t);
 
-            transform.position = Vector3.Lerp(startPos, endPos, smoothT);
-            transform.rotation = Quaternion.Slerp(startRot, endRot, smoothT);
-
+            transform.SetPositionAndRotation(
+                Vector3.Lerp(startPos, endPos, smoothT),
+                Quaternion.Slerp(startRot, endRot, smoothT)
+            );
             timeElapsed += Time.deltaTime;
             yield return null;
         }
         
-        transform.position = endPos;
-        transform.rotation = endRot;
+       
+        transform.SetPositionAndRotation(endPos, endRot);
 
         yield return new WaitForSeconds(.2f);
         manager.CurrentPlayerGrabWeapon();

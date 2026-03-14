@@ -1,33 +1,58 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using static SelectShotgunRoundSystem;
 
-public class ShotGun : Gun
+[RequireComponent(typeof(AudioSource))]
+public sealed class Shotgun : Gun, IShoot
 {
-    private int RemainingBulletsToAdd = 2;
+    public static Shotgun Instance { get; private set; }
+    private ParticleSystem muzzleFlash;
+    
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip pumpingAudio;
+    [SerializeField] private AudioClip gunShotAudio;
+    [SerializeField] private AudioClip gunClickAudio;
 
-    void Start() {
-        Debug.Log("Shotgun");
-        mag.InitMag(8);
+    public Animator animator;
+    private void Awake()
+    {
+        Instance = this;
+        audioSource = GetComponent<AudioSource>();
+        muzzleFlash = transform.GetChild(0).GetComponent<ParticleSystem>();
+
+        GameObject temp = Camera.main.transform.GetChild(0).gameObject;
+        temp.SetActive(true);
+        temp.GetComponent<SelectShotgunRoundSystem>().shotgun = this;
     }
 
-    public void ManualyLoadBullet() {
-        if (RemainingBulletsToAdd > 0) {
+    public void LoadShells(int liveRoundCount)
+    {
+        mag.Init(8);
+        for (int i = 0; i < liveRoundCount; i++)
             mag.AddBullet();
-            mag.ShuffleShift();
-            RemainingBulletsToAdd--;
-        }
+
+        mag.ShuffleRandom();
     }
 
     public override void Shoot(IShootable target)
     {
+        if (target == null)
+            return;
+
         if (mag.GetBullet())
         {
-            Debug.Log("BANG!");
+            muzzleFlash.Play();
+            audioSource.PlayOneShot(gunShotAudio);
             target.GetShot();
         }
         else
         {
-            Debug.Log("Click.");
+            audioSource.PlayOneShot(gunClickAudio);
             target.EmptyShot();
         }
+
+        //animator.SetBool("shouldPickupGun", false);
     }
+
 }

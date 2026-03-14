@@ -84,7 +84,7 @@ public class Player : MonoBehaviour, IShootable
         // PLAY ANIMATION HERE: Point gun at own head
         shotSelf = true;
         Shoot(this);
-        PlayerCamera_.AddStress(2.0f);
+        PlayerCamera_?.AddStress(2.0f);
     }
 
     public void ShootOpponent()
@@ -95,12 +95,13 @@ public class Player : MonoBehaviour, IShootable
 
         // PLAY ANIMATION HERE: Point gun at enemy
         Shoot(otherPlayer);
-        PlayerCamera_.AddStress(-2.0f);
+        PlayerCamera_?.AddStress(-2.0f);
     }
 
     public void UseSpecial()
     {
-        if (!weaponHasSpecial) return;
+        if (!weaponHasSpecial)
+            return;
 
         (heldWeapon as IHaveSpecial).Special(this);
 

@@ -1,19 +1,20 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class Burst : Gun, IHaveSpecial
 {
     public bool canTargetOpponent = false;
 
-    private void Start()
-    {
-        mag.InitMag(10);
-    }
+    private void Start() => mag.Init(10);
 
     public override void Shoot(IShootable target)
     {
-        if (mag.GetBullet()) target.GetShot();
-        else target.EmptyShot();
+
+        if (mag.GetBullet())
+            target.GetShot();
+        else
+            target.EmptyShot();
+
     }
 
     public void Special(IShootable target)

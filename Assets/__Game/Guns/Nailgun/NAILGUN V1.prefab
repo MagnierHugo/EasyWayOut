@@ -75,6 +75,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5c695d3f608e24fa9179be49c35657, type: 3}
       insertIndex: -1
       addedObject: {fileID: -6723235403962635363}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5c695d3f608e24fa9179be49c35657, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2725689280208929079}
   m_SourcePrefab: {fileID: 100100000, guid: ac5c695d3f608e24fa9179be49c35657, type: 3}
 --- !u!1 &7724015520100769085 stripped
 GameObject:
@@ -93,4 +96,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db4726d894a0c5498ad9fc377107806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleTransformData:
+    Position: {x: 0.5, y: 2.05, z: 2.75}
+    Rotation: {x: 0, y: -90, z: 90}
+  pointedAtOpponentTransformData:
+    Position: {x: 0.574, y: 2.199, z: 2.75}
+    Rotation: {x: 0, y: 0, z: 0}
   canTargetOpponent: 0
+--- !u!114 &2725689280208929079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724015520100769085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4f46201c860c743b64e367ef8ca2a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDuration: 1
+  playerPos: {x: 0.5, y: 2.05, z: 2.75}
+  playerRot: {x: 0.49999997, y: 0.49999997, z: -0.49999997, w: -0.49999997}
+  opponentPos: {x: 0.9, y: 2.05, z: 0.555}
+  opponentRot: {x: 0.49999997, y: 0.49999997, z: 0.49999997, w: 0.49999997}

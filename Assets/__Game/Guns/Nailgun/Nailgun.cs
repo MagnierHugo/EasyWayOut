@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Nailgun : Gun, IHaveSpecial
+public sealed class Nailgun : Gun, IHaveSpecial
 {
     public bool canTargetOpponent = false;
 
@@ -11,11 +11,11 @@ public class Nailgun : Gun, IHaveSpecial
     {
         Debug.Log("Nailgun");
         // Init mag with 11 chambers and 3 bullets
-        mag.InitMag(11);
+
+        mag.Init(11);
         mag.AddBullet();
-        mag.ShuffleShift();
         mag.AddBullet();
-        mag.ShuffleShift();
+        mag.ShuffleRandom();
     }
 
     public override void Shoot(IShootable target)
@@ -32,7 +32,8 @@ public class Nailgun : Gun, IHaveSpecial
         }
 
 
-        if (!canShootHand && !isHandNailed) { canShootHand = true; }
+        if (!canShootHand && !isHandNailed)
+            canShootHand = true;
     }
 
     public void Special(IShootable target)

@@ -15,29 +15,31 @@ public class DoubleBarrel : Gun, IHaveSpecial
         Debug.Log("Double");
 
         foreach (Mag mag in mags)
-            mag.InitMag(6);
+
+            mag.Init(6);
         
         mag = mags[currentMag];
     }
 
     public override void Shoot(IShootable target)
     {
-        bool bullet = mags[currentMag].GetBullet();
-        if (!bullet)
+        if (mags[currentMag].GetBullet())
+        {
+            Debug.Log("BANG!");
+            target.GetShot();
+            muzzleFlash.Play();
+        }
+        else
         {
             Debug.Log("Click.");
             target.EmptyShot();
-            return;
-        }
-
-        muzzleFlash.Play();
-        Debug.Log("BANG!");
-        target.GetShot();
+        }       
     }
 
     public void Special(IShootable target)
     {
-        if (lastSwitch == target) return;
+        if (lastSwitch == target)
+            return;
 
         currentMag = currentMag == 0 ? 1 : 0;
         lastSwitch = target;
