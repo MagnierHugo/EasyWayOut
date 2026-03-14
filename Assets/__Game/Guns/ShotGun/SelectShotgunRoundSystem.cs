@@ -28,7 +28,7 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     private ShotgunRound blankRoundInstance;
     private Vector3 blankRoundAnchorPoint;
 
-
+    [Space(8)]
     [SerializeField] private float lerpToPositionDuration;
     [SerializeField] private float durationBetweenSelections;
     private WaitForSeconds awaitDurationBetweenSelections;
@@ -42,7 +42,11 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     [SerializeField] private float velocityUponDiscardCoefficient;
 
     [SerializeField] private Shotgun shotgun;
+    [Space(8)]
+    [SerializeField] private TMPro.TextMeshProUGUI textMeshPro;
+    [SerializeField, TextArea] private string chooseRoundText;
 
+    
     private void Awake()
     {
         Transform temp = transform.GetChild(0);
@@ -92,7 +96,6 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     private bool forceStopMovement;
     private IEnumerator MoveRoundsIntoView(Action callback)
     {
-        Debug.Log("Started lerp");
         forceStopMovement = false;
         float elapsed = 0;
         yield return new WaitUntil(
@@ -118,7 +121,6 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
         );
 
         forceStopMovement = false;
-        Debug.Log("Ended lerp");
         callback?.Invoke();
     }
 
@@ -163,8 +165,6 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
 
     private void ClearRounds(Rigidbody relevantRigidbody)
     {
-        Debug.Log(nameof(ClearRounds));
-
         Destroy(relevantRigidbody);
 
         blankRoundInstance.gameObject.SetActive(false);
@@ -224,5 +224,20 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, .1f);
+    }
+    [System.Serializable]
+    public struct TransformData
+    {
+        public Vector3 Position;
+        public Vector3 Rotation;
+        public TransformData(Vector3 position, Quaternion rotation)
+        {
+            Position = position;
+            Rotation = rotation.eulerAngles;
+        }
+        public readonly void Apply(Transform onto)
+        {
+            onto.SetPositionAndRotation(Position, Quaternion.Euler(Rotation));
+        }
     }
 }

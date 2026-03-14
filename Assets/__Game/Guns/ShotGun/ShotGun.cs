@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using static SelectShotgunRoundSystem;
 
 [RequireComponent(typeof(AudioSource))]
 public sealed class Shotgun : MonoBehaviour, IShoot
@@ -14,6 +15,10 @@ public sealed class Shotgun : MonoBehaviour, IShoot
     [SerializeField] private AudioClip gunShotAudio;
     [SerializeField] private AudioClip gunClickAudio;
 
+    public TransformData idleTransformData;
+    public TransformData pointedAtOpponentTransformData;
+
+    public Animator animator;
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -34,12 +39,19 @@ public sealed class Shotgun : MonoBehaviour, IShoot
         if (target == null)
             return;
 
-        StartCoroutine(StartShootingSequence());
-    }
+        if (mag.GetBullet())
+        {
+            muzzleFlash.Play();
+            audioSource.PlayOneShot(gunShotAudio);
+            target.GetShot();
+        }
+        else
+        {
+            audioSource.PlayOneShot(gunClickAudio);
+            target.EmptyShot();
+        }
 
-    private IEnumerator StartShootingSequence()
-    {
-        yield return null;
+        animator.SetBool("shouldPickupGun", false);
     }
 
 }

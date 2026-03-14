@@ -1,5 +1,10 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -18,15 +23,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject burstPrefab = null;
 
     public bool playerHasGun = true;
-    private List<int> weaponList = new List<int> { 0, 1, 2, 3 };
+    private readonly List<int> weaponList = new List<int> { 0, 1, 2, 3 };
     private Vector3 spawnPos = new Vector3(0.7f, 2, 1.7f);
 
     public Gun currentWeapon;
 
-    private void Start()
-    {
-        InitGame();
-    }
+    private void Start() => InitGame();
 
     private void InitGame()
     {
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SlideToFirst());
     }
 
-    private System.Collections.IEnumerator SlideToFirst()
+    private IEnumerator SlideToFirst()
     {
         yield return new WaitForSeconds(3f);
 

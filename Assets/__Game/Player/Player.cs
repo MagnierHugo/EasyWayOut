@@ -92,7 +92,8 @@ public class Player : MonoBehaviour, IShootable
 
     public void UseSpecial()
     {
-        if (!weaponHasSpecial) return;
+        if (!weaponHasSpecial)
+            return;
 
         (heldWeapon as IHaveSpecial).Special(this);
 

@@ -16,7 +16,7 @@ public class DoubleBarrel : Gun, IHaveSpecial
 
         foreach (Mag mag in mags)
 
-            mag.InitMag(6);
+            mag.Init(6);
         
         mag = mags[currentMag];
     }

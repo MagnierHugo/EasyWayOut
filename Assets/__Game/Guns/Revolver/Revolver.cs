@@ -4,8 +4,6 @@ using UnityEngine.InputSystem;
 
 public class Revolver : Gun, IHaveSpecial
 {
-    private readonly Mag mag = new Mag();
-
     [Header("Components")]
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private Animator animator;
@@ -79,11 +77,5 @@ public class Revolver : Gun, IHaveSpecial
         mag.AddBullet();
         mag.ShuffleShift();
         Shoot(target);
-    }
-
-    [ContextMenu("HELP")]
-    public void Help()
-    {
-        var animationState = animator.GetAnimatorTransitionInfo(0);
     }
 }
