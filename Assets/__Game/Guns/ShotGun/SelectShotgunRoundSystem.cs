@@ -41,7 +41,7 @@ public sealed class SelectShotgunRoundSystem : MonoBehaviour
     private bool demonstrationSequenceOver;
     [SerializeField] private float velocityUponDiscardCoefficient;
 
-    [SerializeField] private Shotgun shotgun;
+    [HideInInspector] public Shotgun shotgun;
     [Space(8)]
     [SerializeField] private TMPro.TextMeshProUGUI textMeshPro;
     [SerializeField, TextArea] private string chooseRoundText;

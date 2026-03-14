@@ -14,10 +14,8 @@ public sealed class Nailgun : Gun, IHaveSpecial
 
         mag.Init(11);
         mag.AddBullet();
-        mag.ShuffleShift();
         mag.AddBullet();
-        mag.ShuffleShift();
-
+        mag.ShuffleRandom();
     }
 
     public override void Shoot(IShootable target)

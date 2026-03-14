@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         currentRound = 0;
 
-        GameObject spawnedObject = Instantiate(revolverPrefab, spawnPos, Quaternion.identity);
+        GameObject spawnedObject = Instantiate(shotgunPrefab, spawnPos, Quaternion.identity);
         currentWeapon = spawnedObject.GetComponent<Gun>();
 
         player.EquipWeapon(currentWeapon);

@@ -4,10 +4,9 @@ using UnityEngine;
 using static SelectShotgunRoundSystem;
 
 [RequireComponent(typeof(AudioSource))]
-public sealed class Shotgun : MonoBehaviour, IShoot
+public sealed class Shotgun : Gun, IShoot
 {
-    private readonly Mag mag = new Mag();
-
+    public static Shotgun Instance { get; private set; }
     private ParticleSystem muzzleFlash;
     
     private AudioSource audioSource;
@@ -15,14 +14,16 @@ public sealed class Shotgun : MonoBehaviour, IShoot
     [SerializeField] private AudioClip gunShotAudio;
     [SerializeField] private AudioClip gunClickAudio;
 
-    public TransformData idleTransformData;
-    public TransformData pointedAtOpponentTransformData;
-
     public Animator animator;
     private void Awake()
     {
+        Instance = this;
         audioSource = GetComponent<AudioSource>();
-        muzzleFlash = transform.GetChild(1).GetComponent<ParticleSystem>();
+        muzzleFlash = transform.GetChild(0).GetComponent<ParticleSystem>();
+
+        GameObject temp = Camera.main.transform.GetChild(0).gameObject;
+        temp.SetActive(true);
+        temp.GetComponent<SelectShotgunRoundSystem>().shotgun = this;
     }
 
     public void LoadShells(int liveRoundCount)
@@ -34,7 +35,7 @@ public sealed class Shotgun : MonoBehaviour, IShoot
         mag.ShuffleRandom();
     }
 
-    public void Shoot(IShootable target)
+    public override void Shoot(IShootable target)
     {
         if (target == null)
             return;
@@ -51,7 +52,7 @@ public sealed class Shotgun : MonoBehaviour, IShoot
             target.EmptyShot();
         }
 
-        animator.SetBool("shouldPickupGun", false);
+        //animator.SetBool("shouldPickupGun", false);
     }
 
 }

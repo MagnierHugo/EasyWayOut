@@ -17,9 +17,9 @@ public sealed class ShotgunAnimationEvent : MonoBehaviour
     [SerializeField] private Animator animator;
     private void Awake()
     {
-        animator.SetBool("shouldPickupGun", true);
+        //animator.SetBool("shouldPickupGun", true);
         
-        shotgunRoot.GetComponent<Shotgun>().animator = animator;
+        Shotgun.Instance.animator = animator;
     }
     public static event Action OnGrabShotgun = () => print("Grabbed here");
 
@@ -33,7 +33,6 @@ public sealed class ShotgunAnimationEvent : MonoBehaviour
         //    Quaternion.Euler(58.394f, 19.772f, 77.686f)
         //);
         StartCoroutine(FadeEffect.Fade(.5f, 1, .3f));
-        shotgunRoot.GetComponent<Shotgun>().animator = animator;
     }
 
     public void Tick()
