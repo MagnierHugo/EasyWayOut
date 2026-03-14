@@ -25,7 +25,7 @@ public sealed class StartGame : MonoBehaviour {
     }
 
     public void LoadGameScene() {
-        UnityEngine.Debug.Log("Hidden Menu...");
+        // UnityEngine.Debug.Log("Hidden Menu...");
         Menu.SetActive(false);
     }
 }
