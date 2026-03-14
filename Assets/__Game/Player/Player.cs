@@ -16,7 +16,8 @@ public class Player : MonoBehaviour, IShootable
     [SerializeField] private GameObject SpecialButton = null;
 
     [Header("Animation")]
-    [SerializeField] private Animator animator;
+    public Animator animator;
+    public PlayerAnimationEvents animationEvents;
     [SerializeField] private Transform hand;
 
 
@@ -24,6 +25,8 @@ public class Player : MonoBehaviour, IShootable
     private bool shotSelf = false;
     private bool weaponHasSpecial = false;
     private AIPersonality opponentPersonality = AIPersonality.Maniac;
+
+    public bool dead = false;
 
     public void MakeAChoice()
     {
@@ -95,12 +98,29 @@ public class Player : MonoBehaviour, IShootable
     {
         if (isOpponent) { gameManager.OpponentDied(); }
         else { gameManager.PlayerDied(); }
+
+        if (shotSelf)
+        {
+            animator.SetBool("DropGun", true);
+            dead = true;
+        }
+        else
+        {
+            otherPlayer.animator.SetBool("DropGun", true);
+            otherPlayer.dead = true;
+
+        }
     }
 
-    public void EmptyShot()
+    public void EmptyShot(bool again = true)
     {
-        if (!shotSelf)
+        if (!shotSelf || !again)
+        {
+            print(nameof(EmptyShot));
+            print(animator);
+            print(animator.GetCurrentAnimatorStateInfo(0));
             otherPlayer.animator.SetBool("DropGun", true);
+        }
         else
             gameManager.PlayTurn();
 
@@ -175,11 +195,7 @@ public class Player : MonoBehaviour, IShootable
     }
 
     public void GrabWeapon() => heldWeapon.transform.SetParent(hand);
-    public void DropWeapon()
-    {
-        heldWeapon.transform.SetParent(null);
-        print(nameof(DropWeapon));
-    }
+    public void DropWeapon() => heldWeapon.transform.SetParent(null);
     public void StartGrabAnimation() => animator.SetBool("GrabGun", true);
 
     public void OnGrabAnimationEnd()
@@ -191,6 +207,13 @@ public class Player : MonoBehaviour, IShootable
     public void OnDropAnimationEnd()
     {
         animator.SetBool("DropGun", false);
+
+        if (dead)
+        {
+            dead = false;
+            return;
+        }
+
         gameManager.ChangeWeaponSide();
     }
 
@@ -198,13 +221,13 @@ public class Player : MonoBehaviour, IShootable
     {
         animator.SetBool("AimSelf", false);
         ShootSelfButton.SetActive(true);
-        if (weaponHasSpecial) SpecialButton.SetActive(true);
+        if (weaponHasSpecial && !isOpponent) SpecialButton.SetActive(true);
     }
 
     public void OnAimOpponentAnimationEnd()
     {
         animator.SetBool("AimOp", false);
-        ShootOpponentButton.SetActive(true);
+        if (!isOpponent) ShootOpponentButton.SetActive(true);
     }
 
     public void OnAimNoneAnimatedEnd()

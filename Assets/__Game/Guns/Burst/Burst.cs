@@ -4,16 +4,21 @@ using UnityEngine;
 public class Burst : Gun, IHaveSpecial
 {
     public bool canTargetOpponent = false;
+    [SerializeField] private ParticleSystem muzzleFlash;
 
     private void Start() => mag.Init(10);
 
     public override void Shoot(IShootable target)
     {
+        target.GetShot();
 
-        if (mag.GetBullet())
-            target.GetShot();
-        else
-            target.EmptyShot();
+        //if (mag.GetBullet())
+        //{
+        //    muzzleFlash.Play();
+        //    target.GetShot();
+        //}
+        //else
+        //    target.EmptyShot(false);
 
     }
 

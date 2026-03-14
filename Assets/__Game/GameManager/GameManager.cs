@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
 
     private void InitGame()
     {
-        currentRound = 0;
+        currentRound = 4;
 
-        GameObject spawnedObject = Instantiate(revolverPrefab, spawnPos, Quaternion.identity);
+        GameObject spawnedObject = Instantiate(burstPrefab, spawnPos, Quaternion.identity);
         currentWeapon = spawnedObject.GetComponent<Gun>();
 
         player.EquipWeapon(currentWeapon);
@@ -84,7 +84,9 @@ public class GameManager : MonoBehaviour
         SpawnRandomWeapon();
 
         playerHasGun = true;
-        PlayTurn();
+        StartCoroutine(SlideToFirst());
+        //player.animator.SetBool("GrabGun", true);
+        //PlayTurn();
     }
 
     public void PlayTurn()
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Start the next turn
-        Invoke("PlayTurn", mover.moveDuration);
+        //Invoke("PlayTurn", mover.moveDuration);
     }
 
     public void CurrentPlayerGrabWeapon()
@@ -172,7 +174,7 @@ public class GameManager : MonoBehaviour
 
         GameObject weaponToSpawn = null;
 
-        switch (chosenWeaponID)
+        switch (3)
         {
             case 0:
                 weaponToSpawn = doubleBarrelPrefab;

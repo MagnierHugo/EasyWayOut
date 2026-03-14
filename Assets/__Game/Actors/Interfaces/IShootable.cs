@@ -1,5 +1,5 @@
 public interface IShootable
 {
     public void GetShot();
-    public void EmptyShot();
+    public void EmptyShot(bool again = true);
 }

@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Runtime.ExceptionServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class AIExecutioner
@@ -11,10 +12,17 @@ public static class AIExecutioner
 
         switch (personality)
         {
-
             case AIPersonality.Maniac:
-                if (Random.value > 0.5f) opponent.ShootSelf();
-                else opponent.ShootOpponent();
+                if (Random.value > 0.5f)
+                {
+                    //opponent.animator.SetBool("AimSelf", true);
+                    opponent.ShootSelf();
+                }
+                else
+                {
+                    //opponent.animator.SetBool("AimOp", true);
+                    opponent.ShootOpponent();
+                }
                 break;
 
             case AIPersonality.Thug:
