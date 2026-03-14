@@ -53,7 +53,7 @@ public class CinematicText : MonoBehaviour {
         }
     }
 
-    private bool paused;
+    private bool paused = true;
     private void SetPaused(bool state) {
         paused = state;
         displayText.gameObject.SetActive(!paused);
