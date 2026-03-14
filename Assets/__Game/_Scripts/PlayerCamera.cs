@@ -26,9 +26,10 @@ public class PlayerCamera : MonoBehaviour {
 
     private Vector3 RotationOffset;
 
-    [SerializeField] private float MentalStrenght = Random.Range(100, 150);
+    [SerializeField] private float MentalStrenght = 100;
 
     void Awake() {
+        MentalStrenght = Random.Range(100, 150);
         // 3. Convert the List to a Dictionary for easy access in Update
         foreach (var entry in BehaviorList) {
             if (!behaviorDict.ContainsKey(entry.Name)) {
