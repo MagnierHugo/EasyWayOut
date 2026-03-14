@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, IShootable
     [SerializeField] private bool isOpponent = false;
 
     [SerializeField] private Player otherPlayer = null;
+    [SerializeField] private PlayerCamera PlayerCamera_ = null;
     [SerializeField] private GameObject ShootSelfButton = null;
     [SerializeField] private GameObject ShootOpponentButton = null;
     [SerializeField] private GameObject SpecialButton = null;
@@ -59,8 +60,7 @@ public class Player : MonoBehaviour, IShootable
         //}
     }
 
-    private void Shoot(IShootable target)
-    {
+    private void Shoot(IShootable target) {
         heldWeapon.Shoot(target);
 
         if (isOpponent) return;
@@ -78,6 +78,7 @@ public class Player : MonoBehaviour, IShootable
         // PLAY ANIMATION HERE: Point gun at own head
         shotSelf = true;
         Shoot(this);
+        PlayerCamera_.AddStress(2.0f);
     }
 
     public void ShootOpponent()
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour, IShootable
 
         // PLAY ANIMATION HERE: Point gun at enemy
         Shoot(otherPlayer);
+        PlayerCamera_.AddStress(-2.0f);
     }
 
     public void UseSpecial()

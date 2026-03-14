@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
 
 [System.Serializable]
 public struct CameraShakeBehavior {
@@ -24,7 +26,10 @@ public class PlayerCamera : MonoBehaviour {
 
     private Vector3 RotationOffset;
 
+    [SerializeField] private float MentalStrenght = 100;
+
     void Awake() {
+        MentalStrenght = Random.Range(100, 150);
         // 3. Convert the List to a Dictionary for easy access in Update
         foreach (var entry in BehaviorList) {
             if (!behaviorDict.ContainsKey(entry.Name)) {
@@ -56,6 +61,20 @@ public class PlayerCamera : MonoBehaviour {
                 RotationOffset.y + y,
                 RotationOffset.z + z
             );
+        }
+    }
+
+    public void AddStress(float amount) {
+        MentalStrenght += amount;
+        if (MentalStrenght < 0) {
+            MentalStrenght = 10;
+        }
+        if (MentalStrenght < 66.0f) {
+            CurrentCameraShakeBehavior = "Idle";
+        } else if (MentalStrenght < 33.0f) {
+            CurrentCameraShakeBehavior = "Panic";
+        } else {
+            CurrentCameraShakeBehavior = "Terror";
         }
     }
 }
