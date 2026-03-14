@@ -23,18 +23,13 @@ public class Player : MonoBehaviour, IShootable
     private Gun heldWeapon = null;
     private bool shotSelf = false;
     private bool weaponHasSpecial = false;
-
-    // You would drag your UI Canvas holding the "Shoot Self" and "Shoot Opponent" buttons here
-    // public GameObject actionUI; 
+    private AIPersonality opponentPersonality = AIPersonality.Maniac;
 
     public void MakeAChoice()
     {
         if (isOpponent) return;
 
         Debug.Log("Player's turn. Waiting for input...");
-
-        // 1. Turn on the UI so the player can click a button
-        // actionUI.SetActive(true); 
     }
 
     public void MakeAutoChoice()
@@ -43,33 +38,21 @@ public class Player : MonoBehaviour, IShootable
 
         Debug.Log("Opponent is thinking...");
 
-        // 50/50 chance to shoot self or player.
-        float randomChoice = Random.value;
-
-        // Little delay for more tension
-        StartCoroutine(AIDecisionDelay(randomChoice));
+        StartCoroutine(AIDecisionDelay());
     }
 
-    private IEnumerator AIDecisionDelay(float choice)
+    private IEnumerator AIDecisionDelay()
     {
         yield return new WaitForSeconds(1.5f);
 
-        ShootOpponent();
-
-        //if (choice > 0.5f)
-        //{
-        //    ShootSelf();
-        //}
-        //else
-        //{
-        //    ShootOpponent();
-        //}
+        AIExecutioner.ExecuteAI(opponentPersonality, this, weaponHasSpecial, heldWeapon);
     }
 
     private void Shoot(IShootable target) {
         heldWeapon.Shoot(target);
 
         if (isOpponent) return;
+
         SpecialButton.SetActive(false);
         ShootSelfButton.SetActive(false);
         ShootOpponentButton.SetActive(false);
@@ -77,7 +60,6 @@ public class Player : MonoBehaviour, IShootable
 
     public void ShootSelf()
     {
-        // actionUI.SetActive(false); // Hide the buttons once a choice is made
 
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at themselves.");
 
@@ -89,8 +71,6 @@ public class Player : MonoBehaviour, IShootable
 
     public void ShootOpponent()
     {
-        // actionUI.SetActive(false); 
-
         Debug.Log((isOpponent ? "Opponent" : "Player") + " points the gun at the enemy.");
 
         // PLAY ANIMATION HERE: Point gun at enemy
@@ -166,6 +146,32 @@ public class Player : MonoBehaviour, IShootable
     {
         heldWeapon = newWeapon;
         weaponHasSpecial = heldWeapon is IHaveSpecial;
+    }
+
+    public void UpdatePersonality(int roundNumber)
+    {
+        switch(roundNumber)
+        {
+            case 0:
+                opponentPersonality = AIPersonality.Maniac;
+                break;
+
+            case 1:
+                opponentPersonality = AIPersonality.Thug;
+                break;
+
+            case 2:
+                opponentPersonality = AIPersonality.Coward;
+                break;
+
+            case 3:
+                opponentPersonality = AIPersonality.Gambler;
+                break;
+
+            case 4:
+                opponentPersonality = AIPersonality.Calculator;
+                break;
+        }
     }
 
     public void GrabWeapon() => heldWeapon.transform.SetParent(hand);

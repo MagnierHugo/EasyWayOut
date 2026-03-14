@@ -2,9 +2,9 @@ using System.Globalization;
 using System.Runtime.ExceptionServices;
 using UnityEngine;
 
-public class AIExecutioner : MonoBehaviour
+public static class AIExecutioner
 {
-    public void ExecuteAI(AIPersonality personality, Player opponent, bool canUseSpecial, Gun gun)
+    public static void ExecuteAI(AIPersonality personality, Player opponent, bool canUseSpecial, Gun gun)
     {
         Mag mag = gun.GetMag();
         float chanceToDie = (mag.GetNumberOfBullets() / mag.GetNumberOfChamberLeft());
@@ -65,7 +65,7 @@ public class AIExecutioner : MonoBehaviour
         }
     }
 
-    private float[] CalculateBestOption(Gun gun, bool canUseSpecial, float bullets, float chamberLeft)
+    private static float[] CalculateBestOption(Gun gun, bool canUseSpecial, float bullets, float chamberLeft)
     {
         float[] scores = new float[3];
 

@@ -1,18 +1,21 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Rendering; // Required for Post Processing Volume
-
-
+using UnityEngine.Rendering;
 
 public class LightingManager : MonoBehaviour
 {
     [Header("References")]
-    public Light tableSpotlight;
-    public Volume postProcessVolume;
+    [SerializeField] private Light tableSpotlight;
+    [SerializeField] private Volume postProcessVolume;
 
     [Header("Round Settings")]
-    public float transitionDuration = 2f;
-    public RoundLighting[] rounds;
+    [SerializeField] private float transitionDuration = 2f;
+    [SerializeField] private RoundLighting[] rounds;
+
+    [Header("Round Settings")]
+    [SerializeField] private MeshRenderer tableRenderer = null;
+    [SerializeField] private Material[] tableMaterials = null;
+
 
     private Coroutine currentTransition;
     private bool isFlickering = false;
@@ -26,6 +29,8 @@ public class LightingManager : MonoBehaviour
 
         if (currentTransition != null) StopCoroutine(currentTransition);
         currentTransition = StartCoroutine(TransitionLight(rounds[roundIndex]));
+
+        UpdateTableMaterial(roundIndex);
     }
 
     private IEnumerator TransitionLight(RoundLighting target)
@@ -57,6 +62,20 @@ public class LightingManager : MonoBehaviour
         if (postProcessVolume != null)
         {
             postProcessVolume.weight = target.enableInsanityPostProcess ? 1f : 0f;
+        }
+    }
+
+    private void UpdateTableMaterial(int roundIndex)
+    {
+        // 1. Make sure we actually have materials assigned and the index is valid
+        if (tableMaterials != null && roundIndex < tableMaterials.Length)
+        {
+            // 2. Swap the material directly on the renderer
+            tableRenderer.material = tableMaterials[roundIndex];
+        }
+        else
+        {
+            Debug.LogWarning("Tried to change table material, but the index was out of bounds or materials array is empty.");
         }
     }
 

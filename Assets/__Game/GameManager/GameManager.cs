@@ -15,6 +15,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Player opponent;
 
+    [Header("End")]
+    [SerializeField] private GameObject gameAssets = null;
+    [SerializeField] private GameObject endAssets = null;
+    [SerializeField] private Revolver endRevolver = null;
+    [SerializeField] private Canvas endCanvas = null;
+
     [Header("Guns Prefab")]
     [SerializeField] private GameObject revolverPrefab = null;
     [SerializeField] private GameObject nailgunPrefab = null;
@@ -63,7 +69,17 @@ public class GameManager : MonoBehaviour
     private void StartNewRound()
     {
         currentRound++;
+        if (currentRound >= 5)
+        {
+            if (currentWeapon != null) Destroy(currentWeapon.gameObject);
+
+            StartCoroutine(JustOneLastGame());
+            return;
+        }
+
         lightingManager.ChangeRound(currentRound);
+
+        opponent.UpdatePersonality(currentRound);
 
         SpawnRandomWeapon();
 
@@ -81,10 +97,6 @@ public class GameManager : MonoBehaviour
         {
             opponent.MakeAutoChoice();
         }
-
-        // The game now waits here. 
-        // Once the choice animation is done, the animation event 
-        // should call gameManager.ChangeWeaponSide() to continue the loop.
     }
 
     public void ChangeWeaponSide()
@@ -120,15 +132,23 @@ public class GameManager : MonoBehaviour
 
     public void OpponentDied()
     {
-        // Play Change opponent animation
-        // Once the new opponent sits down, start the next round
+        StartCoroutine(PlayAnimations());
+    }
+    
+    private IEnumerator PlayAnimations()
+    {
+        opponent.GetComponent<OpponentMover>().FallBackward();
+        yield return new WaitForSeconds(4f);
+        
+        opponent.GetComponent<OpponentMover>().DropIntoChair();
+        yield return new WaitForSeconds(2f);
+
         StartNewRound();
     }
 
     public void PlayerDied()
     {
-        // Game Over Screen
-        Debug.Log("Player died. Game Over.");
+        GameOver();
     }
 
     private void SpawnRandomWeapon()
@@ -175,10 +195,32 @@ public class GameManager : MonoBehaviour
             currentWeapon = spawnedObject.GetComponent<Gun>();
             currentWeapon.GetComponent<WeaponMover>().manager = this;
 
-            Debug.Log(currentWeapon.name);
-
             player.EquipWeapon(currentWeapon);
             opponent.EquipWeapon(currentWeapon);
         }
+    }
+
+    private IEnumerator JustOneLastGame()
+    {
+        gameAssets.SetActive(false);
+        endAssets.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        endRevolver.Shoot(player);
+        yield return new WaitForSeconds(0.5f);
+
+        GameOver();
+    }
+
+    private void GameOver()
+    {
+        endCanvas.enabled = true;
+        StartCoroutine(CloseWithDelay());
+    }
+
+    private IEnumerator CloseWithDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        Application.Quit();
     }
 }
