@@ -62,3 +62,15 @@ The inmates you face are not entirely random. Each round introduces an opponent 
 ## Credits
 
 Developed in 42 hours for the "Just one last game" Game Jam by a team of 4 Developers and 4 Artists.
+
+Developers :
+- Hugo Magnier
+- Antoine Riviale
+- Jonathan de Vaulchier
+- Lucas
+
+Artists :
+- 
+-
+-
+-
