@@ -49,7 +49,7 @@ The inmates you face are not entirely random. Each round introduces an opponent 
 
 ## Installation & How to Play
 
-*Note: This game is currently available for Windows only.*
+*Note: This game is currently available for Windows.*
 
 1. Download the latest build from the Releases page.
 2. Extract the ZIP file to your preferred directory.
@@ -62,10 +62,3 @@ The inmates you face are not entirely random. Each round introduces an opponent 
 ## Credits
 
 Developed in 42 hours for the "Just one last game" Game Jam by a team of 4 Developers and 4 Artists.
-
-**Programming & Logic:**
-* **Jonathan de Vaulchier**
-  * GitHub: [yumisakii](https://github.com/yumisakii)
-  * Contact: jonathan.devaulchier.dev@gmail.com
-
-*(Add the names and links of your other 7 team members here)*
