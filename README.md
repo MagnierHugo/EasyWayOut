@@ -1,76 +1,53 @@
 # Easy Way Out
 
-![Gameplay Banner Placeholder](put_your_image_link_here.png)
+A gritty, high-stakes Russian Roulette simulator developed for a Game Jam under the theme "Just one last game"[cite: 7]. Built entirely from scratch in exactly 42 hours by a team of 4 developers and 4 artists[cite: 7]. 
 
-A gritty, high-stakes Russian Roulette simulator developed for a Game Jam under the theme "Just one last game." Built entirely from scratch in exactly 42 hours by a team of 4 developers and 4 artists.
-
-You are a prisoner on death row. Your only chance at freedom is to survive a grueling tournament against five other inmates. Win six consecutive rounds of lethal chance, and you walk free. Lose, and it truly is your last game.
+You are a prisoner on death row[cite: 7]. Your only chance at freedom is to survive a grueling tournament against five other inmates[cite: 7]. Win six consecutive rounds of lethal chance, and you walk free[cite: 7]. 
 
 ## About The Project
 
-This game subverts the standard Russian Roulette formula by introducing unique, modified weapons and distinct AI personalities. It is designed to be a claustrophobic, tension-filled experience where probability math meets psychological warfare. As the rounds progress, the environment degrades, the lighting grows harsher, and the opponents become mathematically ruthless.
+This game subverts the standard Russian Roulette formula by introducing unique, modified weapons and distinct AI personalities[cite: 7]. It is designed to be a claustrophobic, tension-filled experience where probability math meets psychological warfare[cite: 7]. As the rounds progress, the environment degrades, the lighting grows harsher, and the opponents become mathematically ruthless[cite: 7].
 
-Built in Unity, the project relies on a robust state-machine architecture to handle turn-based logic, dynamic lighting progression, and Expected Value calculations for the enemy AI.
+Built in Unity, the project relies on a robust state-machine architecture to handle turn-based logic, dynamic lighting progression, and Expected Value (EV) calculations for the enemy AI[cite: 7].
 
-## Gameplay & Rules
+## Core Systems & Architecture
 
-The game is played in a turn-based loop. On your turn, you must make one of three choices:
+### System A: Probability-Driven AI & Expected Value (EV)
+Creating a scalable AI framework for 5 distinct opponent personalities that make decisions based on dynamic probability math rather than simple random chance[cite: 8].
+- **State-Machine Architecture:** Implemented a robust turn-based state machine that handles transitions between player input, AI calculation, and resolution phases without race conditions[cite: 8].
+- **Mathematical Decision Making:** Engineered "The Calculator" AI to act as the final boss[cite: 8]. Instead of using `Random.Range`, the AI reads the current array size of the weapon's chambers, calculates the exact float probability of a live round, and executes the action (Shoot Self, Shoot Opponent, or Special) that yields the highest mathematical Expected Value (EV) of survival[cite: 8].
+- **Personality Weights:** The other 4 AI profiles (Maniac, Thug, Coward, Gambler) utilize weighted decision matrices that skew these base probability calculations to simulate recklessness, defense, or panic[cite: 8].
 
-1. **Shoot Yourself:** If the chamber is loaded, you die and the game ends. If the chamber is empty, you survive and earn a free extra turn.
-2. **Shoot the Opponent:** If the chamber is loaded, you win the round. If the chamber is empty, you safely pass the gun to your opponent, and it becomes their turn.
-3. **Use Special:** Activate the unique modifier of the current weapon to manipulate the odds.
+### System B: Modular Weapon Logic
+Managing multiple conflicting rulesets (varying chamber sizes, dual magazines, self-targeting limitations) within the exact same core turn-based loop during a tight 42-hour deadline[cite: 8].
+- **Polymorphism:** Built a base weapon class that handles standard chamber indexing and firing logic[cite: 8].
+- **Override Mechanics:** Unique weapons like the Double-Barrel (swapping between two distinct magazine arrays) and the Shotgun (blindly loading variable shell counts) override the base methods, allowing the core game loop to remain clean and agnostic to the specific weapon currently equipped[cite: 8].
 
-## The Arsenal
+## Cross-Discipline Pipeline
 
-Instead of relying on a single gun, the tournament forces players to adapt to five different modified weapons, each with its own probability logic and special ability.
+Collaborated closely with the 4-person art team to link the dynamic lighting progression and environment degradation to the internal state machine, heightening the tension as rounds progressed without bottlenecking the gameplay code[cite: 9].
 
-* **The Standard Revolver** (1 Bullet, 6 Chambers)
-  * *Special:* Adds an extra bullet to the cylinder, shuffles it, and forces the user to shoot themselves before ending their turn. A desperate escape from certain death.
-* **The Double-Barrel** (2 Magazines: 1 Bullet, 6 Chambers each)
-  * *Special:* Swaps between the two magazines. This ability has a cooldown and cannot be used again until the opponent also uses it.
-* **The Burst** (1 Bullet, 10 Chambers)
-  * *Limitation:* Players can only target themselves. 
-  * *Special:* Fires two chambers simultaneously. 
-* **The Shotgun** (Variable: 2 to 8 Bullets, 8 Chambers total)
-  * *Special:* No mid-round special. Instead, at the start of the round, both players blindly choose to load between 1 and 4 live shells into the queue.
-* **The Nailgun** (3 Nails, 11 Slots)
-  * *Limitation:* Players can only target themselves.
-  * *Special:* The player shoots their own hand instead of their head, guaranteeing survival for that turn. Cannot be used consecutively or if the hand is already nailed.
+## Key Engineering Takeaways
 
-## AI Personalities
-
-The inmates you face are not entirely random. Each round introduces an opponent with a specific decision-making framework, escalating in difficulty.
-
-1. **The Maniac:** Pure chaos. 50/50 chance of shooting you or themselves.
-2. **The Thug:** Aggressive but reckless. Always targets the player and uses special abilities without tactical thought.
-3. **The Coward:** Plays defensively. Shoots themselves when the risk is low to farm free turns, but panics and targets the player when the odds of death climb.
-4. **The Gambler:** A risk-taker who pushes the odds, intentionally shooting themselves multiple times to build tension before striking.
-5. **The Calculator:** The final boss. Analyzes the exact float probability of every available action and executes the choice with the highest mathematical Expected Value of survival.
+- **AI Balancing:** Balancing the AI decision weights so that "The Coward" and "The Gambler" actually felt like distinct personalities to the player required constant iteration on the probability thresholds[cite: 9].
+- **Architectural Scaling:** Architecting a clean state machine for turn-based combat in the first few hours of a jam prevented spaghetti code when adding complex weapons like the Nailgun (which temporarily alters the "damage" target) late in the development cycle[cite: 9].
 
 ## Installation & How to Play
 
-*Note: This game is currently available for Windows.*
+*Note: This game is currently available for Windows[cite: 7].*
 
-1. Download the latest build from the Releases page.
-2. Extract the ZIP file to your preferred directory.
-3. Run the `.exe` file to start the game.
+1. Download the latest build from the Releases page[cite: 7].
+2. Extract the ZIP file to your preferred directory[cite: 7].
+3. Run the `.exe` file to start the game[cite: 7].
 
 **Controls:**
-* **Mouse Scroll Wheel:** Rotate your arm / aim the weapon.
-* **Left Mouse Click:** Interact with UI buttons to make your choice.
+- **Mouse Scroll Wheel:** Rotate your arm / aim the weapon[cite: 7].
+- **Left Mouse Click:** Interact with UI buttons to make your choice[cite: 7].
 
 ## Credits
 
-Developed in 42 hours for the "Just one last game" Game Jam by a team of 4 Developers and 4 Artists.
-
-Developers :
-- Hugo Magnier
-- Antoine Riviale
-- Jonathan de Vaulchier
-- Lucas
-
-Artists :
-- 
--
--
--
+Developed by:
+- Hugo Magnier[cite: 7]
+- Antoine Riviale[cite: 7]
+- Jonathan de Vaulchier[cite: 7]
+- Lucas[cite: 7]
